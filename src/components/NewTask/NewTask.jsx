@@ -1,0 +1,32 @@
+import './NewTask.scss';
+
+const NewTask = () => {
+  return (
+    <form className="newtask">
+      <label className="newtask__label" htmlFor="newtask">
+        Añadir nueva tarea
+      </label>
+      <input
+        className="newtask__input"
+        type="text"
+        name="newtask"
+        id="newtask"
+        placeholder="¿Qué necesitas hacer?"
+      />
+      <button className="newtask__btn" type="submit" aria-label="Añadir tarea">
+        <svg
+          className="add-icon"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="512"
+          height="512"
+          viewBox="0 0 448 512"
+        >
+          <path d="M256 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v160H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h160v160c0 17.7 14.3 32 32 32s32-14.3 32-32V288h160c17.7 0 32-14.3 32-32s-14.3-32-32-32H256z" />
+        </svg>
+      </button>
+    </form>
+  );
+};
+
+export default NewTask;

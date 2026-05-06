@@ -1,0 +1,54 @@
+.newtask {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'label label' 'input button';
+  gap: var(--spacing-md);
+  padding-block: var(--spacing-md);
+  padding-inline: var(--spacing-md);
+  margin-block: var(--spacing-md);
+  margin-inline: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  background-color: var(--color-brand-border);
+
+  &__label {
+    grid-area: label;
+    display: block;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &__input {
+    grid-area: input;
+    padding-inline: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+
+    &:focus {
+      border-color: var(--color-brand);
+      outline: 2px solid var(--color-brand-border);
+    }
+
+    &:hover {
+      border-color: var(--color-brand);
+    }
+
+    &::placeholder {
+      color: var(--color-text-muted);
+    }
+  }
+
+  &__btn {
+    grid-area: button;
+    padding-inline: var(--spacing-sm);
+    padding-block: 0.45rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-brand);
+  }
+}
+
+.add-icon {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-surface);
+}
