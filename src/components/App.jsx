@@ -1,6 +1,8 @@
-import '../styles/main.scss';
 import Header from './Header/Header';
 import NewTask from './NewTask/NewTask';
+import Tasks from './Tasks/Tasks';
+import PendingIcon from './icons/PendingIcon';
+import CompletedIcon from './icons/CompletedIcon';
 // import { useState, useEffect } from 'react';
 // import fetchData from "../services/api"; // Al ser .js no hay que poner la extensión
 // import ls from "../services/localStorage";
@@ -42,7 +44,11 @@ function App() {
   return (
     <>
       <Header />
-      <NewTask />
+      <main>
+        <NewTask />
+        <Tasks title="Tareas pendientes" icon={<PendingIcon />} />
+        <Tasks title="Tareas completadas" icon={<CompletedIcon />} />
+      </main>
     </>
   );
 }

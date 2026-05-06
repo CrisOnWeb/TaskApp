@@ -1,0 +1,70 @@
+.tasks {
+  padding-inline: var(--spacing-lg);
+  margin-block: var(--spacing-xl);
+  &__name {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding-inline: var(--spacing-sm);
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-text-muted);
+  }
+
+  &__title {
+    font-size: 1rem;
+  }
+
+  &__number {
+    padding-inline: var(--spacing-sm);
+    padding-block: var(--spacing-xs);
+    border-radius: var(--radius-full);
+    background-color: var(--color-brand-light);
+    color: var(--color-brand);
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &__list {
+    list-style-type: none;
+    padding-inline: var(--spacing-md);
+    margin-block: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+
+  &__item + &__item {
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__input {
+    appearance: none;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--color-brand);
+    border-radius: 5px;
+  }
+
+  &__btn {
+    margin-left: auto;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &__trash {
+    width: 20px;
+    height: fit-content;
+    padding-block: var(--spacing-sm);
+    fill: var(--color-text-muted);
+  }
+}
