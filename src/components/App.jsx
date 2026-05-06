@@ -1,4 +1,5 @@
 import '../styles/main.scss';
+import Header from './Header/Header';
 // import { useState, useEffect } from 'react';
 // import fetchData from "../services/api"; // Al ser .js no hay que poner la extensión
 // import ls from "../services/localStorage";
@@ -39,7 +40,7 @@ function App() {
 
   return (
     <>
-      <h1>Hola mundo</h1>
+      <Header />
     </>
   );
 }
