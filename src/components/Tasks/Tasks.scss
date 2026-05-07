@@ -52,6 +52,7 @@
     padding: var(--spacing-sm);
     border: 2px solid var(--color-brand);
     border-radius: 5px;
+    cursor: pointer;
   }
 
   &__btn {
@@ -67,4 +68,8 @@
     padding-block: var(--spacing-sm);
     fill: var(--color-text-muted);
   }
+}
+
+.completed {
+  text-decoration-line: line-through;
 }

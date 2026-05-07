@@ -1,4 +1,5 @@
 import Header from './Header/Header';
+import Footer from './Footer/Footer';
 import NewTask from './NewTask/NewTask';
 import Tasks from './Tasks/Tasks';
 import PendingIcon from './icons/PendingIcon';
@@ -49,6 +50,7 @@ function App() {
         <Tasks title="Tareas pendientes" icon={<PendingIcon />} />
         <Tasks title="Tareas completadas" icon={<CompletedIcon />} />
       </main>
+      <Footer />
     </>
   );
 }

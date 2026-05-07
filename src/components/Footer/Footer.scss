@@ -1,0 +1,28 @@
+.footer {
+  padding-block: var(--spacing-lg);
+  padding-inline: var(--spacing-lg);
+  background-color: var(--color-brand-light);
+
+  &__copy {
+    width: fit-content;
+    margin-inline: auto;
+    color: var(--color-text-muted);
+  }
+
+  &__author {
+    display: inline-flex;
+    border-bottom: 2px solid transparent;
+    text-decoration-line: none;
+    color: var(--color-brand);
+    font-weight: var(--font-weight-semibold);
+    transition:
+      transform 0.2s ease-in,
+      border-bottom 0.4s ease-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-bottom: 2px solid var(--color-brand);
+    }
+  }
+}
