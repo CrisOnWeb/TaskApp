@@ -1,6 +1,21 @@
 import './NewTask.scss';
 
-const NewTask = () => {
+const NewTask = ({ newTaskInput, setNewTaskInput, onAddTask }) => {
+  const handleCreateTaskInput = (ev) => {
+    setNewTaskInput(ev.target.value);
+  };
+
+  const handleCreateTaskBtn = (ev) => {
+    ev.preventDefault();
+    const newTask = {
+      id: crypto.randomUUID(),
+      task: newTaskInput,
+      completed: false,
+    };
+    onAddTask(newTask);
+    setNewTaskInput('');
+  };
+
   return (
     <form className="newtask">
       <label className="newtask__label" htmlFor="newtask">
@@ -12,8 +27,15 @@ const NewTask = () => {
         name="newtask"
         id="newtask"
         placeholder="¿Qué necesitas hacer?"
+        value={newTaskInput}
+        onChange={handleCreateTaskInput}
       />
-      <button className="newtask__btn" type="submit" aria-label="Añadir tarea">
+      <button
+        className="newtask__btn"
+        type="submit"
+        aria-label="Añadir tarea"
+        onClick={handleCreateTaskBtn}
+      >
         <svg
           className="add-icon"
           aria-hidden="true"

@@ -50,7 +50,11 @@ function App() {
   const pendingTasks = tasks.filter((task) => !task.completed);
   const completedTasks = tasks.filter((task) => task.completed);
 
-  const onToggleTask = (id) => {
+  const addTask = (newTask) => {
+    setTasks([...tasks, newTask]);
+  };
+
+  const ToggleTask = (id) => {
     return setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
@@ -62,19 +66,23 @@ function App() {
     <>
       <Header search={search} setSearch={setSearch} />
       <main>
-        <NewTask />
+        <NewTask
+          newTaskInput={newTaskInput}
+          setNewTaskInput={setNewTaskInput}
+          onAddTask={addTask}
+        />
         <FilterTasks />
         <Tasks
           title="Tareas pendientes"
           icon={<PendingIcon />}
           tasks={pendingTasks}
-          onToggleTask={onToggleTask}
+          onToggleTask={ToggleTask}
         />
         <Tasks
           title="Tareas completadas"
           icon={<CompletedIcon />}
           tasks={completedTasks}
-          onToggleTask={onToggleTask}
+          onToggleTask={ToggleTask}
         />
       </main>
       <Footer />
