@@ -69,7 +69,7 @@ function App() {
   return (
     <>
       <Header search={search} setSearch={setSearch} />
-      <main>
+      <main className="main">
         <NewTask
           newTaskInput={newTaskInput}
           setNewTaskInput={setNewTaskInput}
