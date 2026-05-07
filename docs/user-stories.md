@@ -14,13 +14,13 @@ PARA organizar lo que tengo que hacer
 
 #### Tareas
 
-- [ ] T1 Crear componente TaskInput
-      **Criterios de aceptación:**
+- [✔] T1 Crear componente TaskInput
+  **Criterios de aceptación:**
 - ✔ Se muestra un input en pantalla
 - ✔ Se muestra un botón para añadir tarea
 
-- [ ] T2 Crear estado para tareas (useState)
-      **Criterios de aceptación:**
+- [✔] T2 Crear estado para tareas (useState)
+  **Criterios de aceptación:**
 - ✔ Existe un array inicial vacío
 - ✔ El estado se puede actualizar
 
@@ -48,7 +48,7 @@ PARA organizar lo que tengo que hacer
 
 ### HU-2 Completar tarea
 
-**Estado:** [ ] pendiente
+**Estado:** [✔] pendiente
 
 COMO usuaria
 QUIERO marcar una tarea como completada
@@ -56,28 +56,28 @@ PARA saber qué tareas he terminado
 
 #### Tareas
 
-- [ ] T7 Añadir propiedad "completed" a cada tarea
-      **Criterios de aceptación:**
+- [✔] T7 Añadir propiedad "completed" a cada tarea
+  **Criterios de aceptación:**
 - ✔ Cada tarea tiene propiedad completed
 - ✔ Valor inicial es false
 
-- [ ] T8 Implementar checkbox en TaskItem
-      **Criterios de aceptación:**
+- [✔] T8 Implementar checkbox en TaskItem
+  **Criterios de aceptación:**
 - ✔ Cada tarea tiene checkbox visible
 - ✔ El checkbox refleja el estado
 
-- [ ] T9 Crear función toggleTask
-      **Criterios de aceptación:**
+- [✔] T9 Crear función toggleTask
+  **Criterios de aceptación:**
 - ✔ El estado cambia al hacer click
 - ✔ Alterna entre true/false
 
-- [ ] T10 Actualizar estado sin mutar
-      **Criterios de aceptación:**
+- [✔] T10 Actualizar estado sin mutar
+  **Criterios de aceptación:**
 - ✔ No se modifica el array original
 - ✔ React detecta el cambio
 
-- [ ] T11 Aplicar estilos de tarea completada
-      **Criterios de aceptación:**
+- [✔] T11 Aplicar estilos de tarea completada
+  **Criterios de aceptación:**
 - ✔ Tareas completadas tienen estilo distinto
 - ✔ Se diferencian claramente
 
@@ -308,8 +308,8 @@ PARA gestionar mis tareas en cualquier lugar
 
 #### Tareas
 
-- [ ] T38 Crear layout mobile (columna)
-      **Criterios de aceptación:**
+- [✔] T38 Crear layout mobile (columna)
+  **Criterios de aceptación:**
 - ✔ Todo se muestra en una columna
 - ✔ Es usable en pantalla pequeña
 

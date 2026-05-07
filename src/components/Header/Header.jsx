@@ -1,10 +1,7 @@
 import './Header.scss';
 import logo from '../../assets/img/logo.png';
-import { useState } from 'react';
 
-const Header = () => {
-  const [search, setSearch] = useState('');
-
+const Header = ({ search, setSearch }) => {
   const handleSearchInput = (ev) => {
     setSearch(ev.target.value);
   };

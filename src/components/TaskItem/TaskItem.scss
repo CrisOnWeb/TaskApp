@@ -1,0 +1,41 @@
+.tasks {
+  .tasks__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+
+  &__item + &__item {
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__input {
+    // appearance: none;
+    // padding: var(--spacing-sm);
+    // border: 2px solid var(--color-brand);
+    // border-radius: 5px;
+    flex-shrink: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--color-brand);
+    cursor: pointer;
+  }
+
+  &__btn {
+    margin-left: auto;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &__trash {
+    width: 20px;
+    height: fit-content;
+    padding-block: var(--spacing-sm);
+    fill: var(--color-text-muted);
+  }
+}
+
+.completed {
+  text-decoration-line: line-through;
+}

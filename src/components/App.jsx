@@ -5,9 +5,8 @@ import Tasks from './Tasks/Tasks';
 import PendingIcon from './icons/PendingIcon';
 import CompletedIcon from './icons/CompletedIcon';
 import FilterTasks from './FilterTasks/FilterTasks';
-// import { useState, useEffect } from 'react';
-// import fetchData from "../services/api"; // Al ser .js no hay que poner la extensión
-// import ls from "../services/localStorage";
+import ls from '../services/localStorage';
+import { useState, useEffect } from 'react';
 
 function App() {
   /* local storage
@@ -29,28 +28,54 @@ function App() {
   }, [name, email]);
   */
 
-  /* Llamado a API:
-  const [data, setData] = useState([]);
+  const [tasks, setTasks] = useState(
+    ls.get('data', [
+      { id: crypto.randomUUID(), task: 'Llamar al dentista', completed: false },
+      {
+        id: crypto.randomUUID(),
+        task: 'Pedir cita para la declaración de la renta',
+        completed: true,
+      },
+      { id: crypto.randomUUID(), task: 'Llamar a mi madre', completed: false },
+    ])
+  );
+  const [newTaskInput, setNewTaskInput] = useState('');
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
-    fetchData("https://api.com/users")
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-  */
+    ls.set('data', tasks);
+  }, [tasks]);
+
+  const pendingTasks = tasks.filter((task) => !task.completed);
+  const completedTasks = tasks.filter((task) => task.completed);
+
+  const onToggleTask = (id) => {
+    return setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
 
   return (
     <>
-      <Header />
+      <Header search={search} setSearch={setSearch} />
       <main>
         <NewTask />
         <FilterTasks />
-        <Tasks title="Tareas pendientes" icon={<PendingIcon />} />
-        <Tasks title="Tareas completadas" icon={<CompletedIcon />} />
+        <Tasks
+          title="Tareas pendientes"
+          icon={<PendingIcon />}
+          tasks={pendingTasks}
+          onToggleTask={onToggleTask}
+        />
+        <Tasks
+          title="Tareas completadas"
+          icon={<CompletedIcon />}
+          tasks={completedTasks}
+          onToggleTask={onToggleTask}
+        />
       </main>
       <Footer />
     </>
