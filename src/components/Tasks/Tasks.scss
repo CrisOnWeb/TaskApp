@@ -48,10 +48,14 @@
   }
 
   &__input {
-    appearance: none;
-    padding: var(--spacing-sm);
-    border: 2px solid var(--color-brand);
-    border-radius: 5px;
+    // appearance: none;
+    // padding: var(--spacing-sm);
+    // border: 2px solid var(--color-brand);
+    // border-radius: 5px;
+    flex-shrink: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--color-brand);
     cursor: pointer;
   }
 
