@@ -7,12 +7,23 @@ const NewTask = ({ newTaskInput, setNewTaskInput, onAddTask }) => {
 
   const handleCreateTaskBtn = (ev) => {
     ev.preventDefault();
+
+    const trimmedTask = newTaskInput.trim();
+
+    // Validamos que no esté vacío y reseteamos
+    if (!trimmedTask) {
+      setNewTaskInput('');
+      return;
+    }
+
     const newTask = {
       id: crypto.randomUUID(),
-      task: newTaskInput,
+      task: trimmedTask,
       completed: false,
     };
+
     onAddTask(newTask);
+
     setNewTaskInput('');
   };
 

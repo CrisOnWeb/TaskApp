@@ -6,7 +6,7 @@
 
 ### HU-1 Añadir tarea
 
-**Estado:** [ ] pendiente
+**Estado:** [✔]
 
 COMO usuaria
 QUIERO añadir una nueva tarea
@@ -24,23 +24,23 @@ PARA organizar lo que tengo que hacer
 - ✔ Existe un array inicial vacío
 - ✔ El estado se puede actualizar
 
-- [ ] T3 Implementar input controlado
-      **Criterios de aceptación:**
+- [✔] T3 Implementar input controlado
+  **Criterios de aceptación:**
 - ✔ El valor del input refleja lo que se escribe
 - ✔ El estado cambia al escribir
 
-- [ ] T4 Implementar función addTask
-      **Criterios de aceptación:**
+- [✔] T4 Implementar función addTask
+  **Criterios de aceptación:**
 - ✔ Se añade una nueva tarea al array
 - ✔ Cada tarea tiene un id único
 - ✔ La tarea aparece en la lista
 
-- [ ] T5 Limpiar input tras añadir tarea
-      **Criterios de aceptación:**
+- [✔] T5 Limpiar input tras añadir tarea
+  **Criterios de aceptación:**
 - ✔ El input queda vacío tras añadir tarea
 
-- [ ] T6 Validar input vacío
-      **Criterios de aceptación:**
+- [✔] T6 Validar input vacío
+  **Criterios de aceptación:**
 - ✔ No se añade tarea si está vacío
 - ✔ No se rompe la aplicación
 
@@ -48,7 +48,7 @@ PARA organizar lo que tengo que hacer
 
 ### HU-2 Completar tarea
 
-**Estado:** [✔] pendiente
+**Estado:** [✔]
 
 COMO usuaria
 QUIERO marcar una tarea como completada
@@ -85,7 +85,7 @@ PARA saber qué tareas he terminado
 
 ### HU-3 Eliminar tarea
 
-**Estado:** [ ] pendiente
+**Estado:** [✔]
 
 COMO usuaria
 QUIERO eliminar una tarea
@@ -93,18 +93,18 @@ PARA mantener mi lista limpia
 
 #### Tareas
 
-- [ ] T12 Añadir botón eliminar en TaskItem
-      **Criterios de aceptación:**
+- [✔] T12 Añadir botón eliminar en TaskItem
+  **Criterios de aceptación:**
 - ✔ Cada tarea tiene botón visible
 - ✔ El botón es clicable
 
-- [ ] T13 Crear función deleteTask
-      **Criterios de aceptación:**
+- [✔] T13 Crear función deleteTask
+  **Criterios de aceptación:**
 - ✔ Se elimina la tarea correcta
 - ✔ No afecta a otras tareas
 
-- [ ] T14 Filtrar tarea por id
-      **Criterios de aceptación:**
+- [✔] T14 Filtrar tarea por id
+  **Criterios de aceptación:**
 - ✔ La tarea desaparece de la lista
 - ✔ El estado se actualiza
 
@@ -203,7 +203,7 @@ PARA encontrarlas rápidamente
 
 ### HU-7 Diferenciar tareas completadas
 
-**Estado:** [ ] pendiente
+**Estado:** [✔]
 
 COMO usuaria
 QUIERO ver claramente qué tareas están completadas
@@ -211,12 +211,12 @@ PARA diferenciarlas visualmente
 
 #### Tareas
 
-- [ ] T27 Aplicar estilo tachado
-      **Criterios de aceptación:**
+- [✔] T27 Aplicar estilo tachado
+  **Criterios de aceptación:**
 - ✔ Texto aparece tachado
 
-- [ ] T28 Cambiar color/opacity de tareas completadas
-      **Criterios de aceptación:**
+- [✔] T28 Cambiar color/opacity de tareas completadas
+  **Criterios de aceptación:**
 - ✔ Texto aparece tachado
 
 ---
@@ -274,7 +274,7 @@ PARA tener una visión general de mi progreso
 
 ### HU-10 Guardar tareas automáticamente
 
-**Estado:** [ ] pendiente
+**Estado:** [✔]
 
 COMO usuaria
 QUIERO que mis tareas se guarden automáticamente
@@ -282,16 +282,16 @@ PARA no perderlas al cerrar la aplicación
 
 #### Tareas
 
-- [ ] T35 Guardar tareas en localStorage
-      **Criterios de aceptación:**
+- [✔] T35 Guardar tareas en localStorage
+  **Criterios de aceptación:**
 - ✔ Los datos se guardan en navegador
 
-- [ ] T36 Cargar tareas al iniciar la app
-      **Criterios de aceptación:**
+- [✔] T36 Cargar tareas al iniciar la app
+  **Criterios de aceptación:**
 - ✔ Las tareas se cargan al iniciar
 
-- [ ] T37 Sincronizar estado con localStorage
-      **Criterios de aceptación:**
+- [✔] T37 Sincronizar estado con localStorage
+  **Criterios de aceptación:**
 - ✔ Cambios se reflejan automáticamente
 
 ---
