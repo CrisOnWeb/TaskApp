@@ -4,6 +4,7 @@ import NewTask from './NewTask/NewTask';
 import Tasks from './Tasks/Tasks';
 import PendingIcon from './icons/PendingIcon';
 import CompletedIcon from './icons/CompletedIcon';
+import FilterTasks from './FilterTasks/FilterTasks';
 // import { useState, useEffect } from 'react';
 // import fetchData from "../services/api"; // Al ser .js no hay que poner la extensión
 // import ls from "../services/localStorage";
@@ -47,6 +48,7 @@ function App() {
       <Header />
       <main>
         <NewTask />
+        <FilterTasks />
         <Tasks title="Tareas pendientes" icon={<PendingIcon />} />
         <Tasks title="Tareas completadas" icon={<CompletedIcon />} />
       </main>
