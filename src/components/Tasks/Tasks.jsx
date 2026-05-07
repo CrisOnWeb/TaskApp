@@ -1,7 +1,7 @@
 import TaskItem from '../TaskItem/TaskItem';
 import './Tasks.scss';
 
-const Tasks = ({ title, icon, tasks, onToggleTask }) => {
+const Tasks = ({ title, icon, tasks, onToggleTask, onDeleteTask }) => {
   return (
     <section className="tasks">
       <div className="tasks__name">
@@ -11,7 +11,12 @@ const Tasks = ({ title, icon, tasks, onToggleTask }) => {
       </div>
       <ul className="tasks__list">
         {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} onToggleTask={onToggleTask} />
+          <TaskItem
+            key={task.id}
+            task={task}
+            onToggleTask={onToggleTask}
+            onDeleteTask={onDeleteTask}
+          />
         ))}
       </ul>
     </section>

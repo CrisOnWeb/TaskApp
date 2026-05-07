@@ -54,6 +54,10 @@ function App() {
     setTasks([...tasks, newTask]);
   };
 
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
   const ToggleTask = (id) => {
     return setTasks(
       tasks.map((task) =>
@@ -77,12 +81,14 @@ function App() {
           icon={<PendingIcon />}
           tasks={pendingTasks}
           onToggleTask={ToggleTask}
+          onDeleteTask={deleteTask}
         />
         <Tasks
           title="Tareas completadas"
           icon={<CompletedIcon />}
           tasks={completedTasks}
           onToggleTask={ToggleTask}
+          onDeleteTask={deleteTask}
         />
       </main>
       <Footer />

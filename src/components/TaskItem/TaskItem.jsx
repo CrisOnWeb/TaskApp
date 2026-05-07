@@ -1,6 +1,10 @@
 import './TaskItem.scss';
 
-const TaskItem = ({ task, onToggleTask }) => {
+const TaskItem = ({ task, onToggleTask, onDeleteTask }) => {
+  const handleDeleteTaskBtn = () => {
+    onDeleteTask(task.id);
+  };
+
   return (
     <li className="tasks__item">
       <input
@@ -19,7 +23,7 @@ const TaskItem = ({ task, onToggleTask }) => {
       >
         {task.task}
       </label>
-      <button className="tasks__btn">
+      <button className="tasks__btn" onClick={handleDeleteTaskBtn}>
         <svg
           className="tasks__trash"
           xmlns="http://www.w3.org/2000/svg"
