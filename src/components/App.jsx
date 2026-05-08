@@ -11,13 +11,17 @@ import { useState, useEffect } from 'react';
 function App() {
   const [tasks, setTasks] = useState(
     ls.get('data', [
-      { id: crypto.randomUUID(), task: 'Llamar al dentista', completed: false },
       {
         id: crypto.randomUUID(),
-        task: 'Pedir cita para la declaración de la renta',
-        completed: true,
+        task: 'Aprender a utilizar TaskApp',
+        completed: false,
       },
-      { id: crypto.randomUUID(), task: 'Llamar a mi madre', completed: false },
+      {
+        id: crypto.randomUUID(),
+        task: 'Crear una nueva tarea',
+        completed: false,
+      },
+      { id: crypto.randomUUID(), task: 'Eliminar una tarea', completed: false },
     ])
   );
   const [newTaskInput, setNewTaskInput] = useState('');
@@ -68,6 +72,7 @@ function App() {
             tasks={pendingTasks}
             onToggleTask={toggleTask}
             onDeleteTask={deleteTask}
+            emptyMessage="🎉 ¡Bien hecho! No hay tareas pendientes."
           />
         )}
         {(filter === 'completed' || filter === 'all') && (
@@ -77,6 +82,7 @@ function App() {
             tasks={completedTasks}
             onToggleTask={toggleTask}
             onDeleteTask={deleteTask}
+            emptyMessage="🌱 Tus tareas completadas aparecerán aquí."
           />
         )}
       </main>

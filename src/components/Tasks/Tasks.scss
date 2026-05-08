@@ -36,4 +36,16 @@
     border-radius: var(--radius-lg);
     overflow: hidden;
   }
+
+  &__empty {
+    padding-block: var(--spacing-md);
+    padding-inline: var(--spacing-lg);
+    margin-block: var(--spacing-md);
+    border: 1px dashed var(--color-border);
+    border-radius: 12px;
+    background-color: var(--color-background);
+    color: var(--color-text-muted);
+    color: var(--color-text-light);
+    text-align: center;
+  }
 }
