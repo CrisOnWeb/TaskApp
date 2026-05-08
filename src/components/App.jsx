@@ -9,25 +9,6 @@ import ls from '../services/localStorage';
 import { useState, useEffect } from 'react';
 
 function App() {
-  /* local storage
-  // En vez de leer la propiedad name leemos la propiedad data y su valor por defecto es un objeto vacío: ls.get('data', {})
-  // Del objeto (vacío o relleno que nos devuelve ls.get) obtenemos la propiedad name: ls.get('data', {}).name
-  // Si la propiedad name existe la usamos, si no, usamos un string vacío: ls.get('data', {}).name || ''
-  const [name, setName] = useState(ls.get("data", {}).name || "");
-  // Lo mismo para el email
-  const [email, setEmail] = useState(ls.get("data", {}).email || "");
-
-  // Usamos useEffect para guardar los datos en el local storage
-  useEffect(() => {
-    // En vez de guardar el nombre por un lado y el email por otro
-    // Guardamos en el local storage un objeto data con las propiedad name y email: { name: 'loquesea', email: 'loquefuere' }
-    ls.set("data", {
-      name: name,
-      email: email,
-    });
-  }, [name, email]);
-  */
-
   const [tasks, setTasks] = useState(
     ls.get('data', [
       { id: crypto.randomUUID(), task: 'Llamar al dentista', completed: false },
@@ -58,12 +39,16 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const ToggleTask = (id) => {
+  const toggleTask = (id) => {
     return setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
+  };
+
+  const handleFilterChange = (status) => {
+    setFilter(status);
   };
 
   return (
@@ -75,21 +60,25 @@ function App() {
           setNewTaskInput={setNewTaskInput}
           onAddTask={addTask}
         />
-        <FilterTasks />
-        <Tasks
-          title="Tareas pendientes"
-          icon={<PendingIcon />}
-          tasks={pendingTasks}
-          onToggleTask={ToggleTask}
-          onDeleteTask={deleteTask}
-        />
-        <Tasks
-          title="Tareas completadas"
-          icon={<CompletedIcon />}
-          tasks={completedTasks}
-          onToggleTask={ToggleTask}
-          onDeleteTask={deleteTask}
-        />
+        <FilterTasks filter={filter} handleFilterChange={handleFilterChange} />
+        {(filter === 'pending' || filter === 'all') && (
+          <Tasks
+            title="Tareas pendientes"
+            icon={<PendingIcon />}
+            tasks={pendingTasks}
+            onToggleTask={toggleTask}
+            onDeleteTask={deleteTask}
+          />
+        )}
+        {(filter === 'completed' || filter === 'all') && (
+          <Tasks
+            title="Tareas completadas"
+            icon={<CompletedIcon />}
+            tasks={completedTasks}
+            onToggleTask={toggleTask}
+            onDeleteTask={deleteTask}
+          />
+        )}
       </main>
       <Footer />
     </>

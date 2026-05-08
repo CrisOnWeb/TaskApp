@@ -114,7 +114,7 @@ PARA mantener mi lista limpia
 
 ### HU-4 Ver tareas pendientes
 
-**Estado:** [ ] pendiente
+**Estado:** [✔]
 
 COMO usuaria
 QUIERO ver solo las tareas pendientes
@@ -122,28 +122,28 @@ PARA centrarme en lo importante
 
 #### Tareas
 
-- [ ] T15 Crear estado "filter"
-      **Criterios de aceptación:**
+- [✔] T15 Crear estado "filter"
+  **Criterios de aceptación:**
 - ✔ El estado tiene valor por defecto
 - ✔ Se puede actualizar
 
-- [ ] T16 Definir valor "pending"
-      **Criterios de aceptación:**
+- [✔] T16 Definir valor "pending"
+  **Criterios de aceptación:**
 - ✔ Existe opción "pending"
 
-- [ ] T17 Filtrar tareas pendientes
-      **Criterios de aceptación:**
+- [✔] T17 Filtrar tareas pendientes
+  **Criterios de aceptación:**
 - ✔ Solo se muestran tareas no completadas
 
-- [ ] T18 Mostrar lista filtrada
-      **Criterios de aceptación:**
+- [✔] T18 Mostrar lista filtrada
+  **Criterios de aceptación:**
 - ✔ La UI refleja el filtro seleccionado
 
 ---
 
 ### HU-5 Ver tareas completadas
 
-**Estado:** [ ] pendiente
+**Estado:** [✔]
 
 COMO usuaria
 QUIERO ver las tareas completadas
@@ -151,20 +151,20 @@ PARA revisar lo que ya he hecho
 
 #### Tareas
 
-- [ ] T19 Reutilizar estado "filter"
-      **Criterios de aceptación:**
+- [✔] T19 Reutilizar estado "filter"
+  **Criterios de aceptación:**
 - ✔ No se crea estado duplicado
 
-- [ ] T20 Definir valor "completed"
-      **Criterios de aceptación:**
+- [✔] T20 Definir valor "completed"
+  **Criterios de aceptación:**
 - ✔ Existe opción "completed"
 
-- [ ] T21 Filtrar tareas completadas
-      **Criterios de aceptación:**
+- [✔] T21 Filtrar tareas completadas
+  **Criterios de aceptación:**
 - ✔ Solo se muestran tareas completadas
 
-- [ ] T22 Mostrar lista filtrada
-      **Criterios de aceptación:**
+- [✔] T22 Mostrar lista filtrada
+  **Criterios de aceptación:**
 - ✔ Se muestran correctamente en UI
 
 ---
