@@ -18,7 +18,7 @@ const NewTask = ({ newTaskInput, setNewTaskInput, onAddTask }) => {
 
     const newTask = {
       id: crypto.randomUUID(),
-      task: trimmedTask,
+      text: trimmedTask,
       completed: false,
     };
 

@@ -13,15 +13,15 @@ function App() {
     ls.get('data', [
       {
         id: crypto.randomUUID(),
-        task: 'Aprender a utilizar TaskApp',
+        text: 'Aprender a utilizar TaskApp',
         completed: false,
       },
       {
         id: crypto.randomUUID(),
-        task: 'Crear una nueva tarea',
+        text: 'Crear una nueva tarea',
         completed: false,
       },
-      { id: crypto.randomUUID(), task: 'Eliminar una tarea', completed: false },
+      { id: crypto.randomUUID(), text: 'Eliminar una tarea', completed: false },
     ])
   );
   const [newTaskInput, setNewTaskInput] = useState('');
@@ -46,7 +46,7 @@ function App() {
     } else {
       const searchedText = normalizeText(search);
       return filteredTasks.filter((task) =>
-        normalizeText(task.task).includes(searchedText)
+        normalizeText(task.text).includes(searchedText)
       );
     }
   };
