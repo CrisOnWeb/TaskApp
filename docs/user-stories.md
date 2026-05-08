@@ -171,7 +171,7 @@ PARA revisar lo que ya he hecho
 
 ### HU-6 Buscar tareas
 
-**Estado:** [ ] pendiente
+**Estado:** [✔]
 
 COMO usuaria
 QUIERO buscar tareas por texto
@@ -179,22 +179,22 @@ PARA encontrarlas rápidamente
 
 #### Tareas
 
-- [ ] T23 Crear estado "search"
-      **Criterios de aceptación:**
+- [✔] T23 Crear estado "search"
+  **Criterios de aceptación:**
 - ✔ El estado guarda texto
 
-- [ ] T24 Implementar input de búsqueda
-      **Criterios de aceptación:**
+- [✔] T24 Implementar input de búsqueda
+  **Criterios de aceptación:**
 - ✔ Se puede escribir texto
 - ✔ El valor se actualiza
 
-- [ ] T25 Filtrar tareas por texto (includes)
-      **Criterios de aceptación:**
+- [✔] T25 Filtrar tareas por texto (includes)
+  **Criterios de aceptación:**
 - ✔ Se muestran tareas que coinciden
 - ✔ No distingue mayúsculas/minúsculas (recomendado)
 
-- [ ] T26 Combinar filtros + búsqueda
-      **Criterios de aceptación:**
+- [✔] T26 Combinar filtros + búsqueda
+  **Criterios de aceptación:**
 - ✔ Se aplican filtro + búsqueda a la vez
 
 ---

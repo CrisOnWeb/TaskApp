@@ -32,8 +32,32 @@ function App() {
     ls.set('data', tasks);
   }, [tasks]);
 
+  const normalizeText = (text) => {
+    return text
+      .normalize('NFD') // Separa acentos
+      .replace(/[\u0300-\u036f]/g, '') // Elimina acentos
+      .toLowerCase() // Minúsculas
+      .trim(); // elimina espacios
+  };
+
+  const searchedTasks = (filteredTasks) => {
+    if (!search.trim()) {
+      return filteredTasks;
+    } else {
+      const searchedText = normalizeText(search);
+      return filteredTasks.filter((task) =>
+        normalizeText(task.task).includes(searchedText)
+      );
+    }
+  };
+
+  // Se filtran las tareas según su estado
   const pendingTasks = tasks.filter((task) => !task.completed);
   const completedTasks = tasks.filter((task) => task.completed);
+
+  // Se filtran por búsqueda de la usuaria
+  const searchedPendingTasks = searchedTasks(pendingTasks);
+  const searchedCompletedTasks = searchedTasks(completedTasks);
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
@@ -69,7 +93,7 @@ function App() {
           <Tasks
             title="Tareas pendientes"
             icon={<PendingIcon />}
-            tasks={pendingTasks}
+            tasks={searchedPendingTasks}
             onToggleTask={toggleTask}
             onDeleteTask={deleteTask}
             emptyMessage="🎉 ¡Bien hecho! No hay tareas pendientes."
@@ -79,7 +103,7 @@ function App() {
           <Tasks
             title="Tareas completadas"
             icon={<CompletedIcon />}
-            tasks={completedTasks}
+            tasks={searchedCompletedTasks}
             onToggleTask={toggleTask}
             onDeleteTask={deleteTask}
             emptyMessage="🌱 Tus tareas completadas aparecerán aquí."
