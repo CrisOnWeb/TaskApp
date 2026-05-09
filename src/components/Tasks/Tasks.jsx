@@ -21,12 +21,13 @@ const Tasks = ({
       ) : (
         <ul className="tasks__list">
           {tasks.map((task) => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onToggleTask={onToggleTask}
-              onDeleteTask={onDeleteTask}
-            />
+            <li className="tasks__item" key={task.id}>
+              <TaskItem
+                task={task}
+                onToggleTask={onToggleTask}
+                onDeleteTask={onDeleteTask}
+              />
+            </li>
           ))}
         </ul>
       )}

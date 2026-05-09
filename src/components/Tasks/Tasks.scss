@@ -37,6 +37,16 @@
     overflow: hidden;
   }
 
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+
+  &__item + &__item {
+    border-top: 1px solid var(--color-border);
+  }
+
   &__empty {
     padding-block: var(--spacing-md);
     padding-inline: var(--spacing-lg);

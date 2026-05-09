@@ -18,7 +18,7 @@ const Header = ({ search, setSearch }) => {
         </label>
         <input
           className="header__input"
-          type="text"
+          type="search"
           name="search"
           id="search"
           placeholder="Buscar tareas..."

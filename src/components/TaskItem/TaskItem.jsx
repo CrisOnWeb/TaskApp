@@ -6,7 +6,7 @@ const TaskItem = ({ task, onToggleTask, onDeleteTask }) => {
   };
 
   return (
-    <li className="tasks__item">
+    <>
       <input
         className="tasks__input"
         type="checkbox"
@@ -41,7 +41,7 @@ const TaskItem = ({ task, onToggleTask, onDeleteTask }) => {
           </g>
         </svg>
       </button>
-    </li>
+    </>
   );
 };
 
