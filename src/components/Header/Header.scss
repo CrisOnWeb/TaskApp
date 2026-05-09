@@ -10,6 +10,13 @@
   padding-top: var(--spacing-md);
   padding-bottom: var(--spacing-xs);
 
+  @media (width > 768px) {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: ' branding search menu';
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--color-background);
+  }
+
   &__logoAndName {
     grid-area: branding;
     display: flex;
@@ -29,6 +36,8 @@
 
   &__form {
     grid-area: search;
+    justify-self: center;
+    width: min(100%, 800px);
   }
 
   &__input {
