@@ -3,6 +3,7 @@ import './Tasks.scss';
 
 const Tasks = ({
   title,
+  numberOfTasks,
   icon,
   tasks,
   onToggleTask,
@@ -14,7 +15,7 @@ const Tasks = ({
       <div className="tasks__name">
         {icon}
         <h2 className="tasks__title">{title}</h2>
-        <span className="tasks__number">14</span>
+        <span className="tasks__number">{numberOfTasks}</span>
       </div>
       {tasks.length === 0 ? (
         <p className="tasks__empty">{emptyMessage}</p>

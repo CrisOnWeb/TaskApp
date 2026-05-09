@@ -41,11 +41,14 @@ function App() {
   };
 
   const searchedTasks = (filteredTasks) => {
+    // Si search está vacío, devuelvo todas las tareas
     if (!search.trim()) {
       return filteredTasks;
     } else {
+      // Si no, filtro por el contenido de search
       const searchedText = normalizeText(search);
       return filteredTasks.filter((task) =>
+        // Recojo las tareas que coincidan
         normalizeText(task.text).includes(searchedText)
       );
     }
@@ -58,6 +61,11 @@ function App() {
   // Se filtran por búsqueda de la usuaria
   const searchedPendingTasks = searchedTasks(pendingTasks);
   const searchedCompletedTasks = searchedTasks(completedTasks);
+
+  // Se calcula la cantidad de tareas según status
+  // Usamos las variables de búsqueda porque queremos que se actualice cuando buscamos
+  const numberOfPendingTasks = searchedPendingTasks.length;
+  const numberOfCompletedTasks = searchedCompletedTasks.length;
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
@@ -92,6 +100,7 @@ function App() {
         {(filter === 'pending' || filter === 'all') && (
           <Tasks
             title="Tareas pendientes"
+            numberOfTasks={numberOfPendingTasks}
             icon={<PendingIcon />}
             tasks={searchedPendingTasks}
             onToggleTask={toggleTask}
@@ -102,6 +111,7 @@ function App() {
         {(filter === 'completed' || filter === 'all') && (
           <Tasks
             title="Tareas completadas"
+            numberOfTasks={numberOfCompletedTasks}
             icon={<CompletedIcon />}
             tasks={searchedCompletedTasks}
             onToggleTask={toggleTask}
