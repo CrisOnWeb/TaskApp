@@ -1,20 +1,24 @@
 .header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    'branding menu'
-    'search search';
-  align-items: center;
-  gap: var(--spacing-lg);
-  padding-inline: var(--spacing-lg);
-  padding-top: var(--spacing-md);
-  padding-bottom: var(--spacing-xs);
-
   @media (width > 768px) {
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas: ' branding search menu';
-    padding-bottom: var(--spacing-md);
     border-bottom: 2px solid var(--color-background);
+  }
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'branding menu'
+      'search search';
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding-inline: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+
+    @media (width > 768px) {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: ' branding search menu';
+      padding-bottom: var(--spacing-md);
+    }
   }
 
   &__logoAndName {

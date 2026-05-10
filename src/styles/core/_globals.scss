@@ -22,6 +22,12 @@ body {
   }
 }
 
+.central-column {
+  width: 100%;
+  max-width: 1228px;
+  margin-inline: auto;
+}
+
 .aside-menu {
   grid-area: aside;
 

@@ -94,7 +94,7 @@ function App() {
   return (
     <>
       <Header search={search} setSearch={setSearch} />
-      <main className="main">
+      <main className="main central-column">
         <aside className="aside-menu">
           <NewTask
             newTaskInput={newTaskInput}
