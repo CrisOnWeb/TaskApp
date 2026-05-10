@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import ls from '../services/localStorage';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import NewTask from './NewTask/NewTask';
@@ -5,8 +7,7 @@ import Tasks from './Tasks/Tasks';
 import PendingIcon from './icons/PendingIcon';
 import CompletedIcon from './icons/CompletedIcon';
 import FilterTasks from './FilterTasks/FilterTasks';
-import ls from '../services/localStorage';
-import { useState, useEffect } from 'react';
+import TaskSummary from './TaskSummary/TaskSummary';
 
 function App() {
   const [tasks, setTasks] = useState(
@@ -66,6 +67,9 @@ function App() {
   // Usamos las variables de búsqueda porque queremos que se actualice cuando buscamos
   const numberOfPendingTasks = searchedPendingTasks.length;
   const numberOfCompletedTasks = searchedCompletedTasks.length;
+  // Usamos las variables de tareas totales para el resumen
+  const pendingTasksSummary = pendingTasks.length;
+  const completedTasksSummary = completedTasks.length;
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
@@ -91,34 +95,45 @@ function App() {
     <>
       <Header search={search} setSearch={setSearch} />
       <main className="main">
-        <NewTask
-          newTaskInput={newTaskInput}
-          setNewTaskInput={setNewTaskInput}
-          onAddTask={addTask}
-        />
-        <FilterTasks filter={filter} handleFilterChange={handleFilterChange} />
-        {(filter === 'pending' || filter === 'all') && (
-          <Tasks
-            title="Tareas pendientes"
-            numberOfTasks={numberOfPendingTasks}
-            icon={<PendingIcon />}
-            tasks={searchedPendingTasks}
-            onToggleTask={toggleTask}
-            onDeleteTask={deleteTask}
-            emptyMessage="🎉 ¡Bien hecho! No hay tareas pendientes."
+        <aside className="aside-menu">
+          <NewTask
+            newTaskInput={newTaskInput}
+            setNewTaskInput={setNewTaskInput}
+            onAddTask={addTask}
           />
-        )}
-        {(filter === 'completed' || filter === 'all') && (
-          <Tasks
-            title="Tareas completadas"
-            numberOfTasks={numberOfCompletedTasks}
-            icon={<CompletedIcon />}
-            tasks={searchedCompletedTasks}
-            onToggleTask={toggleTask}
-            onDeleteTask={deleteTask}
-            emptyMessage="🌱 Tus tareas completadas aparecerán aquí."
+          <FilterTasks
+            filter={filter}
+            handleFilterChange={handleFilterChange}
           />
-        )}
+          <TaskSummary
+            pendingTasksSummary={pendingTasksSummary}
+            completedTasksSummary={completedTasksSummary}
+          />
+        </aside>
+        <div className="content">
+          {(filter === 'pending' || filter === 'all') && (
+            <Tasks
+              title="Tareas pendientes"
+              numberOfTasks={numberOfPendingTasks}
+              icon={<PendingIcon />}
+              tasks={searchedPendingTasks}
+              onToggleTask={toggleTask}
+              onDeleteTask={deleteTask}
+              emptyMessage="🎉 ¡Bien hecho! No hay tareas pendientes."
+            />
+          )}
+          {(filter === 'completed' || filter === 'all') && (
+            <Tasks
+              title="Tareas completadas"
+              numberOfTasks={numberOfCompletedTasks}
+              icon={<CompletedIcon />}
+              tasks={searchedCompletedTasks}
+              onToggleTask={toggleTask}
+              onDeleteTask={deleteTask}
+              emptyMessage="🌱 Tus tareas completadas aparecerán aquí."
+            />
+          )}
+        </div>
       </main>
       <Footer />
     </>

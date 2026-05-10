@@ -1,0 +1,15 @@
+const AllSummaryIcon = () => {
+  return (
+    <svg
+      className="summary__icon summary__icon--all"
+      viewBox="0 0 16 16"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      fill="currentColor"
+    >
+      <path d="m4.261 13.49l6.614-10.822l-1.707-1.043l-5.43 8.885l-2.394-1.916l-1.25 1.562zM16 3h-4v2h4zm0 4h-6v2h6zm0 4v2H8v-2z" />
+    </svg>
+  );
+};
+
+export default AllSummaryIcon;

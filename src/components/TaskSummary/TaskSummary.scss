@@ -1,0 +1,21 @@
+.summary {
+  display: none;
+  padding-block: var(--spacing-md);
+  padding-inline: var(--spacing-md);
+  margin-block: var(--spacing-md);
+  margin-inline: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-brand-light);
+  @media (width > 768px) {
+    display: block;
+  }
+
+  &__title {
+    padding-inline: var(--spacing-xs);
+    padding-bottom: var(--spacing-sm);
+  }
+
+  &__list {
+    list-style-type: none;
+  }
+}

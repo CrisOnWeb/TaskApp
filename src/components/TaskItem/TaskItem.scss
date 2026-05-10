@@ -11,6 +11,12 @@
     cursor: pointer;
   }
 
+  &__label {
+    @media (width < 380px) {
+      font-size: 0.9rem;
+    }
+  }
+
   &__btn {
     margin-left: auto;
     border: none;
