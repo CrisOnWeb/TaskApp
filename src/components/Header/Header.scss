@@ -31,7 +31,7 @@
 
   &__logo {
     width: 48px;
-    height: fit-content;
+    height: auto;
   }
 
   &__name {
@@ -78,6 +78,6 @@
 
 .hamb-icon {
   width: 28px;
-  height: fit-content;
+  height: auto;
   fill: var(--color-brand);
 }

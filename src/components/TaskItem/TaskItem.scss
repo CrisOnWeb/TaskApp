@@ -26,7 +26,7 @@
 
   &__trash {
     width: 20px;
-    height: fit-content;
+    height: auto;
     padding-block: var(--spacing-sm);
     fill: var(--color-text-muted);
   }
