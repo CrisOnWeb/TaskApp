@@ -10,7 +10,11 @@ const Header = ({ search, setSearch }) => {
     <header className="header">
       <div className="header__inner central-column">
         <div className="header__logoAndName">
-          <img className="header__logo" src={logo} alt="Logo de una tarea" />
+          <img
+            className="header__logo"
+            src={logo}
+            alt="Logo de la APP que muestra un dibujo de una tarea"
+          />
           <h1 className="header__name">TaskApp</h1>
         </div>
         <form className="header__form">

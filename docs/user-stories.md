@@ -247,7 +247,7 @@ PARA saber que la acción se ha realizado correctamente
 
 ### HU-9 Ver contador de tareas
 
-**Estado:** [ ] pendiente
+**Estado:** [✔]
 
 COMO usuaria
 QUIERO ver un contador de tareas
@@ -255,16 +255,16 @@ PARA tener una visión general de mi progreso
 
 #### Tareas
 
-- [ ] T32 Calcular número total de tareas
-      **Criterios de aceptación:**
+- [✔] T32 Calcular número total de tareas
+  **Criterios de aceptación:**
 - ✔ Número correcto
 
-- [ ] T33 Calcular tareas completadas
-      **Criterios de aceptación:**
+- [✔] T33 Calcular tareas completadas
+  **Criterios de aceptación:**
 - ✔ Número correcto
 
-- [ ] T34 Mostrar contador en UI
-      **Criterios de aceptación:**
+- [✔] T34 Mostrar contador en UI
+  **Criterios de aceptación:**
 - ✔ Se muestra en UI
 - ✔ Se actualiza dinámicamente
 
@@ -330,16 +330,16 @@ PARA tener una mejor experiencia en pantallas grandes
 
 #### Tareas
 
-- [ ] T40 Implementar layout tablet (2 columnas)
-      **Criterios de aceptación:**
+- [✔] T40 Implementar layout tablet (2 columnas)
+  **Criterios de aceptación:**
 - ✔ Sidebar + contenido visible
 
 - [ ] T41 Implementar layout desktop (3 columnas)
       **Criterios de aceptación:**
 - ✔ Sidebar + main + panel
 
-- [ ] T42 Adaptar filtros a sidebar
-      **Criterios de aceptación:**
+- [✔] T42 Adaptar filtros a sidebar
+  **Criterios de aceptación:**
 - ✔ Filtros visibles lateralmente
 
 - [ ] T43 Ajustar spacing y jerarquía visual

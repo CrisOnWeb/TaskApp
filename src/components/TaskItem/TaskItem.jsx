@@ -23,13 +23,18 @@ const TaskItem = ({ task, onToggleTask, onDeleteTask }) => {
       >
         {task.text}
       </label>
-      <button className="tasks__btn" onClick={handleDeleteTaskBtn}>
+      <button
+        className="tasks__btn"
+        onClick={handleDeleteTaskBtn}
+        aria-label="Eliminar tarea"
+      >
         <svg
           className="tasks__trash"
           xmlns="http://www.w3.org/2000/svg"
           width="256"
           height="256"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <g>
             <path
