@@ -24,6 +24,10 @@ body {
 
 .aside-menu {
   grid-area: aside;
+
+  @media (width > 768px) {
+    padding-block: var(--spacing-xs);
+  }
 }
 
 .content {

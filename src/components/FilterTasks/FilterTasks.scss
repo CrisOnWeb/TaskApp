@@ -1,8 +1,43 @@
 .filter {
-  display: flex;
-  gap: var(--spacing-sm);
-  padding-inline: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
+  padding-block: var(--spacing-xs);
+  padding-inline: var(--spacing-sm);
+  margin-inline: var(--spacing-lg);
+  border: 2px solid var(--color-brand-light);
+  border-radius: var(--radius-md);
+
+  @media (width > 768px) {
+    padding-block: var(--spacing-sm);
+    padding-inline: var(--spacing-md);
+    margin-block: var(--spacing-lg);
+    border-color: var(--color-brand-border);
+  }
+
+  &__title {
+    padding-block: var(--spacing-sm);
+    padding-inline: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-brand-light);
+    font-size: 1.25rem;
+
+    @media (width > 768px) {
+      padding-inline: var(--spacing-xs);
+      border-color: var(--color-brand-border);
+      font-size: 1.5rem;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding-block: var(--spacing-sm);
+
+    @media (width > 768px) {
+      flex-direction: column;
+      padding-block: var(--spacing-sm);
+      padding-inline: var(--radius-sm);
+    }
+  }
 
   &__btn {
     padding-inline: 0.75rem;
@@ -14,6 +49,14 @@
     font-weight: var(--font-weight-semibold);
     transition: transform 0.2s ease;
 
+    @media (width > 380px) {
+      padding-inline: 1rem;
+    }
+
+    @media (width < 768px) {
+      transition: transform 0.3s ease-in;
+    }
+
     &:active,
     &--active {
       border: 2px solid var(--color-brand);
@@ -24,6 +67,9 @@
     &:hover {
       transform: translateY(-2px);
       border: 2px solid var(--color-brand);
+      @media (width > 768px) {
+        transform: translateX(2px);
+      }
     }
 
     &:focus-visible {
