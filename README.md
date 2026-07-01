@@ -1,86 +1,120 @@
 # TaskApp
 
-Aplicación de gestión de tareas desarrollada con React y Vite como proyecto de práctica y aprendizaje de frontend moderno.
+TaskApp is a full-stack task management application built around a modern client-server architecture. It combines a React frontend with a RESTful API developed using Express and MySQL, providing secure user authentication and a solid foundation for managing personal tasks.
 
-La app permite crear, completar, eliminar y buscar tareas, además de filtrarlas por estado. El diseño está planteado con enfoque responsive y una estructura semántica orientada a accesibilidad y buenas prácticas.
-
-## Funcionalidades
-
-- Crear tareas
-- Marcar tareas como completadas
-- Eliminar tareas
-- Filtrar por:
-  - Todas
-  - Pendientes
-  - Completadas
-
-- Buscador de tareas
-  - Ignora mayúsculas/minúsculas
-  - Soporta búsquedas sin tildes
-
-- Persistencia con Local Storage
-- Diseño responsive:
-  - Mobile first
-  - Adaptación tablet y desktop
-
-- Componentes reutilizables en React
+The main goal of this project is to consolidate full-stack development skills by applying real-world practices such as authentication, API consumption, relational databases and project organization, while keeping the application clean, maintainable and ready to evolve.
 
 ---
 
-## Tecnologías utilizadas
+## Features
+
+Current implementation includes:
+
+- User registration and authentication using JWT
+- Secure password hashing with bcrypt
+- Protected API endpoints
+- User profile
+- Create, edit and delete tasks
+- Mark tasks as completed
+- Filter tasks by completion status
+- Search tasks
+- Responsive interface
+- Persistent authentication
+- Input validation
+- Relational MySQL database
+- RESTful API
+- Postman collection with automated API tests
+
+---
+
+## Tech Stack
+
+### Frontend
 
 - React
 - Vite
 - JavaScript
 - SCSS
-- HTML semántico
+- HTML5
+- CSS3
+
+### Backend
+
+- Node.js
+- Express
+- MySQL
+- mysql2
+- JSON Web Tokens (JWT)
+- bcrypt
+- dotenv
+- cors
 
 ---
 
-## Responsive Design
+## Project Structure
 
-La interfaz cambia según el tamaño de pantalla:
-
-- **Mobile:** diseño en una única columna centrado en la lectura rápida y la interacción táctil.
-- **Tablet/Desktop:** estructura tipo dashboard con panel lateral y resumen de tareas.
-
----
-
-## Accesibilidad
-
-Se han aplicado varias prácticas básicas de accesibilidad:
-
-- Uso de HTML semántico (`header`, `main`, `aside`, `section`)
-- Labels asociados a formularios
-- Inputs controlados
-- Jerarquía visual clara
-- Iconos decorativos ocultos para lectores de pantalla cuando corresponde
-
----
-
-## Estado del proyecto
-
-Proyecto todavía en desarrollo.
-
-Pendientes algunas mejoras visuales y pequeños ajustes responsive, pero actualmente funcional y estable para uso básico.
-
----
-
-## Cómo ejecutarlo en local
-
-Clona el repositorio:
-
-```bash
-git clone https://github.com/tu-usuario/tu-repo.git
+```text
+.
+├── backend/
+│   ├── db/
+│   ├── postman/
+│   ├── public/
+│   ├── src/
+│   ├── .env_sample
+│   ├── package.json
+│   └── ...
+│
+├── frontend/
+│   ├── documentation/
+│   ├── public/
+│   ├── src/
+│   ├── package.json
+│   └── ...
+│
+└── README.md
 ```
 
-Instala dependencias:
+---
+
+## Getting Started
+
+### Clone the repository
+
+```bash
+git clone <repository-url>
+```
+
+---
+
+### Backend
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-Inicia el servidor de desarrollo:
+Create your environment file:
+
+```bash
+cp .env_sample .env
+```
+
+Configure the required environment variables:
+
+```text
+PORT=
+
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+
+JWT_SECRET=
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -88,13 +122,83 @@ npm run dev
 
 ---
 
-## Objetivo del proyecto
+### Frontend
 
-Este proyecto forma parte de mi proceso de aprendizaje en desarrollo web frontend y está enfocado en practicar:
+Install dependencies:
 
-- React
-- gestión de estado
-- componentización
-- responsive design
-- arquitectura básica de aplicaciones
-- buenas prácticas de CSS y accesibilidad
+```bash
+cd frontend
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## Database
+
+The backend uses a MySQL relational database.
+
+The repository includes:
+
+- SQL schema
+- MySQL Workbench model
+- Entity Relationship Diagram (ERD)
+
+Import the SQL schema before running the application.
+
+---
+
+## Authentication
+
+Authentication is handled using JSON Web Tokens (JWT).
+
+Protected endpoints require a valid token in the request header:
+
+```http
+Authorization: Bearer <your_jwt_token>
+```
+
+Passwords are securely hashed using bcrypt before being stored in the database.
+
+---
+
+## API Testing
+
+The project includes a Postman collection with automated tests covering:
+
+- Authentication
+- Task CRUD operations
+- Input validation
+- Protected routes
+- Error handling
+
+---
+
+## Roadmap
+
+Some planned improvements include:
+
+- Task categories
+- Task priorities
+- Due dates
+- User profile improvements
+- Better filtering options
+- UI refinements
+- Deployment
+
+---
+
+## Preview
+
+Screenshots and live demo will be added once the first stable version is released.
+
+---
+
+## Author
+
+Developed by **CrisOnWeb**.
