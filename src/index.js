@@ -164,19 +164,12 @@ server.post('/api/tasks', authenticateToken, async (req, res) => {
 });
 
 // Listar tareas
-server.get('/api/tasks', async (req, res) => {
+server.get('/api/tasks', authenticateToken, async (req, res) => {
   let connection;
 
   try {
-    const { user_id, completed } = req.query;
-
-    // Verificamos que user_id es un número o undefined
-    if (user_id !== undefined && Number.isNaN(Number(user_id))) {
-      return res.status(400).json({
-        success: false,
-        error: 'user_id must be a number',
-      });
-    }
+    const { completed } = req.query;
+    const user_id = req.user.sub;
 
     // Verificamos que completed es un string true/false o undefined
     if (
@@ -195,28 +188,17 @@ server.get('/api/tasks', async (req, res) => {
       completed === undefined ? undefined : completed === 'true';
 
     // Creamos query genérica por si no nos pasan queries
-    let sql = 'SELECT * FROM tasks;';
+    let sql =
+      'SELECT id, title, completed, created_at, user_id FROM tasks WHERE user_id = ?;';
 
     // Creamos array de params
-    const params = [];
-
-    // Comprobamos si nos llega el user_id en la request
-    if (user_id !== undefined && completed === undefined) {
-      params.push(Number(user_id));
-      sql = 'SELECT * FROM tasks WHERE user_id = ?;';
-    }
+    const params = [user_id];
 
     // Comprobamos si nos llega el completed en la request
-    if (completed !== undefined && user_id === undefined) {
+    if (completed !== undefined) {
       params.push(completedBoolean);
-      sql = 'SELECT * FROM tasks WHERE completed = ?;';
-    }
-
-    // Comprobamos si nos llegan user_id y completed en la request
-    if (completed !== undefined && user_id !== undefined) {
-      params.push(Number(user_id));
-      params.push(completedBoolean);
-      sql = 'SELECT * FROM tasks WHERE user_id = ? AND completed = ?;';
+      sql =
+        'SELECT id, title, completed, created_at, user_id FROM tasks WHERE user_id = ? AND completed = ?;';
     }
 
     connection = await getConnection();
