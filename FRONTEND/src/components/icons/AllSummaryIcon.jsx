@@ -1,14 +1,22 @@
 const AllSummaryIcon = () => {
   return (
-    <svg
-      className="summary__icon summary__icon--all"
-      viewBox="0 0 16 16"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      fill="currentColor"
-    >
-      <path d="m4.261 13.49l6.614-10.822l-1.707-1.043l-5.43 8.885l-2.394-1.916l-1.25 1.562zM16 3h-4v2h4zm0 4h-6v2h6zm0 4v2H8v-2z" />
-    </svg>
+    <>
+      <svg
+        className="summary__icon summary__icon--all"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={2.5}
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+        />
+      </svg>
+    </>
   );
 };
 

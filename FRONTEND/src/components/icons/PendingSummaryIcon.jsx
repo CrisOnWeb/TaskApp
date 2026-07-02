@@ -1,14 +1,22 @@
 const PendingSummaryIcon = () => {
   return (
-    <svg
-      className="summary__icon summary__icon--pending"
-      viewBox="0 0 21 21"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      fill="currentColor"
-    >
-      <path d="M10 0a10 10 0 1 0 10 10A10 10 0 0 0 10 0zm2.5 14.5L9 11V4h2v6l3 3z" />
-    </svg>
+    <>
+      <svg
+        className="summary__icon summary__icon--pending"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={2.5}
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        />
+      </svg>
+    </>
   );
 };
 

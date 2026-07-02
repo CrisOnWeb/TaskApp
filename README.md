@@ -199,6 +199,14 @@ Screenshots and live demo will be added once the first stable version is release
 
 ---
 
+## Credits
+
+This project uses:
+
+- [Heroicons](https://heroicons.com/) © Tailwind Labs, licensed under MIT.
+
+---
+
 ## Author
 
 Developed by **CrisOnWeb**.
