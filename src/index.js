@@ -539,3 +539,8 @@ server.get('/api/profile', authenticateToken, async (req, res) => {
     }
   }
 });
+
+//
+server.get('*', (req, res) => {
+  res.sendFile(path.join(staticServerPath, 'index.html'));
+});

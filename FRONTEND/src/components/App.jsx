@@ -1,13 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import ls from '../services/localStorage';
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
-import NewTask from './NewTask/NewTask';
-import Tasks from './Tasks/Tasks';
-import PendingIcon from './icons/PendingIcon';
-import CompletedIcon from './icons/CompletedIcon';
-import FilterTasks from './FilterTasks/FilterTasks';
-import TaskSummary from './TaskSummary/TaskSummary';
+import TaskApp from '../pages/TaskApp/TaskApp';
 
 function App() {
   const [tasks, setTasks] = useState(
@@ -93,49 +87,33 @@ function App() {
 
   return (
     <>
-      <Header search={search} setSearch={setSearch} />
-      <main className="main central-column">
-        <aside className="aside-menu">
-          <NewTask
-            newTaskInput={newTaskInput}
-            setNewTaskInput={setNewTaskInput}
-            onAddTask={addTask}
-          />
-          <FilterTasks
-            filter={filter}
-            handleFilterChange={handleFilterChange}
-          />
-          <TaskSummary
-            pendingTasksSummary={pendingTasksSummary}
-            completedTasksSummary={completedTasksSummary}
-          />
-        </aside>
-        <div className="content">
-          {(filter === 'pending' || filter === 'all') && (
-            <Tasks
-              title="Tareas pendientes"
-              numberOfTasks={numberOfPendingTasks}
-              icon={<PendingIcon />}
-              tasks={searchedPendingTasks}
-              onToggleTask={toggleTask}
-              onDeleteTask={deleteTask}
-              emptyMessage="🎉 ¡Bien hecho! No hay tareas pendientes."
+      <Routes>
+        {/* <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} /> */}
+        <Route
+          path="/app"
+          element={
+            <TaskApp
+              search={search}
+              setSearch={setSearch}
+              newTaskInput={newTaskInput}
+              setNewTaskInput={setNewTaskInput}
+              addTask={addTask}
+              filter={filter}
+              handleFilterChange={handleFilterChange}
+              pendingTasksSummary={pendingTasksSummary}
+              completedTasksSummary={completedTasksSummary}
+              numberOfPendingTasks={numberOfPendingTasks}
+              numberOfCompletedTasks={numberOfCompletedTasks}
+              searchedPendingTasks={searchedPendingTasks}
+              searchedCompletedTasks={searchedCompletedTasks}
+              toggleTask={toggleTask}
+              deleteTask={deleteTask}
             />
-          )}
-          {(filter === 'completed' || filter === 'all') && (
-            <Tasks
-              title="Tareas completadas"
-              numberOfTasks={numberOfCompletedTasks}
-              icon={<CompletedIcon />}
-              tasks={searchedCompletedTasks}
-              onToggleTask={toggleTask}
-              onDeleteTask={deleteTask}
-              emptyMessage="🌱 Tus tareas completadas aparecerán aquí."
-            />
-          )}
-        </div>
-      </main>
-      <Footer />
+          }
+        />
+      </Routes>
     </>
   );
 }
