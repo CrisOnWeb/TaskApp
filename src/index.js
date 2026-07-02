@@ -4,13 +4,28 @@ import mysql from 'mysql2/promise';
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Crear servidor
 const server = express();
 
 // Configurar servidor
-server.use(cors());
+if (process.env.NODE_ENV === 'development') {
+  server.use(
+    cors({
+      origin: process.env.FRONTEND_URL,
+    }),
+  );
+}
 server.use(express.json({ limit: '25mb' }));
+
+// Configurar servidor de archivos estáticos
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const staticServerPath = path.join(__dirname, '../public');
+server.use(express.static(staticServerPath));
 
 // Arrancar servidor en un puerto
 const port = process.env.PORT || 3000;
