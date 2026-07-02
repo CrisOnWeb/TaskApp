@@ -103,30 +103,17 @@ const authenticateToken = (req, res, next) => {
 
 // Endpoints
 // Añadir una tarea
-server.post('/api/tasks', async (req, res) => {
+server.post('/api/tasks', authenticateToken, async (req, res) => {
   let connection;
 
   try {
-    if (!req.body) {
-      return res.status(400).json({
-        success: false,
-        error: 'Request body must be JSON',
-      });
-    }
-
-    const { title, completed = false, user_id } = req.body;
+    const { title, completed = false } = req.body;
+    const user_id = req.user.sub;
 
     if (!title?.trim()) {
       return res.status(400).json({
         success: false,
         error: 'title is required',
-      });
-    }
-
-    if (typeof user_id !== 'number') {
-      return res.status(400).json({
-        success: false,
-        error: 'user_id must be a number',
       });
     }
 
@@ -137,10 +124,21 @@ server.post('/api/tasks', async (req, res) => {
       });
     }
 
-    const sql =
-      'INSERT INTO tasks (title, user_id, completed) VALUES (?, ?, ?);';
+    // Comprobar que la tarea no existe
+    let sql = 'SELECT id FROM tasks WHERE title = ? AND user_id = ?;';
 
     connection = await getConnection();
+    const [existingTask] = await connection.query(sql, [title.trim(), user_id]);
+
+    if (existingTask.length > 0) {
+      return res.status(409).json({
+        success: false,
+        error: 'Task already exists',
+      });
+    }
+
+    sql = 'INSERT INTO tasks (title, user_id, completed) VALUES (?, ?, ?);';
+
     const [taskInserted] = await connection.execute(sql, [
       title.trim(),
       user_id,
@@ -152,7 +150,7 @@ server.post('/api/tasks', async (req, res) => {
       taskId: taskInserted.insertId,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       success: false,
@@ -232,7 +230,7 @@ server.get('/api/tasks', async (req, res) => {
 
     res.status(200).json({ success: true, results: tasks });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       success: false,
@@ -307,7 +305,7 @@ server.put('/api/tasks/:taskId', async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       success: false,
@@ -352,7 +350,7 @@ server.delete('/api/tasks/:taskId', async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       success: false,
@@ -418,7 +416,6 @@ server.post('/api/signup', async (req, res) => {
       passwordHash,
     ]);
 
-    console.log(registerResult);
     // Generar token
     const payload = {
       sub: registerResult.insertId,
@@ -502,7 +499,7 @@ server.post('/api/login', async (req, res) => {
       token,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       success: false,
@@ -532,7 +529,7 @@ server.get('/api/profile', authenticateToken, async (req, res) => {
       profile,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       success: false,
