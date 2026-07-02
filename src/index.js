@@ -226,18 +226,12 @@ server.get('/api/tasks', authenticateToken, async (req, res) => {
 });
 
 // Modificar una tarea
-server.put('/api/tasks/:taskId', async (req, res) => {
+server.put('/api/tasks/:taskId', authenticateToken, async (req, res) => {
   let connection;
 
   try {
     const { taskId } = req.params;
-
-    if (!req.body) {
-      return res.status(400).json({
-        success: false,
-        error: 'Request body must be JSON',
-      });
-    }
+    const user_id = req.user.sub;
     const { title, completed } = req.body;
 
     // Verificamos que taskId es un número
@@ -265,16 +259,34 @@ server.put('/api/tasks/:taskId', async (req, res) => {
       });
     }
 
-    const sql = `UPDATE tasks
-                  SET title = ?, completed = ?
-                  WHERE id = ?
-                  LIMIT 1;`;
+    // Comprobar que la tarea que se modifica no coincide con ninguna existente
+    let sql =
+      'SELECT id FROM tasks WHERE title = ? AND user_id = ? AND id <> ?;';
 
     connection = await getConnection();
+    const [existingTask] = await connection.query(sql, [
+      title.trim(),
+      user_id,
+      Number(taskId),
+    ]);
+
+    if (existingTask.length > 0) {
+      return res.status(409).json({
+        success: false,
+        error: 'Task already exists',
+      });
+    }
+
+    sql = `UPDATE tasks
+                  SET title = ?, completed = ?
+                  WHERE id = ? AND user_id = ?
+                  LIMIT 1;`;
+
     const [updateResult] = await connection.execute(sql, [
       title.trim(),
       completed,
       Number(taskId),
+      user_id,
     ]);
 
     if (updateResult.affectedRows === 0) {
