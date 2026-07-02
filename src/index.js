@@ -313,11 +313,12 @@ server.put('/api/tasks/:taskId', authenticateToken, async (req, res) => {
 });
 
 // Eliminar una tarea
-server.delete('/api/tasks/:taskId', async (req, res) => {
+server.delete('/api/tasks/:taskId', authenticateToken, async (req, res) => {
   let connection;
 
   try {
     const { taskId } = req.params;
+    const user_id = req.user.sub;
 
     // Verificamos que taskId es un número
     if (Number.isNaN(Number(taskId))) {
@@ -328,11 +329,14 @@ server.delete('/api/tasks/:taskId', async (req, res) => {
     }
 
     const sql = `DELETE FROM tasks
-                  WHERE id = ?
+                  WHERE id = ? AND user_id = ?
                   LIMIT 1;`;
 
     connection = await getConnection();
-    const [deleteResult] = await connection.execute(sql, [Number(taskId)]);
+    const [deleteResult] = await connection.execute(sql, [
+      Number(taskId),
+      user_id,
+    ]);
 
     if (deleteResult.affectedRows === 0) {
       return res.status(404).json({

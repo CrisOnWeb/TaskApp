@@ -41,11 +41,21 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"title\": \"Comprar leche\",\r\n    \"user_id\": 1,\r\n    \"completed\": false\r\n}",
+              "raw": "{\r\n    \"title\": \"Comprar leche\",\r\n    \"completed\": false\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -98,67 +108,21 @@
             }
           ],
           "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"user_id\": 1,\r\n    \"completed\": true\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:4000/api/tasks",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "tasks"
               ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "new task - Invalid user_id (400)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status is 400\", () => {\r",
-                  "    pm.response.to.have.status(400);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Returns user_id validation error\", () => {\r",
-                  "    const json = pm.response.json();\r",
-                  "\r",
-                  "    pm.expect(json.success).to.eql(false);\r",
-                  "    pm.expect(json.error).to.eql(\"user_id must be a number\");\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Response is JSON\", () => {\r",
-                  "    pm.response.to.have.header(\"Content-Type\");\r",
-                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-                  "});"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
+            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"title\": \"Comprar lechugas\",\r\n    \"user_id\": \"1\",\r\n    \"completed\": true\r\n}",
+              "raw": "{\r\n    \"completed\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -210,11 +174,205 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"title\": \"Comprar arena para el gato\",\r\n    \"user_id\": 1,\r\n    \"completed\": \"si tengo tiempo\"\r\n}",
+              "raw": "{\r\n    \"title\": \"Comprar arena para el gato\",\r\n    \"completed\": \"si tengo tiempo\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/tasks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new task - Duplicated task (409)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 409\", () => {\r",
+                  "    pm.response.to.have.status(409);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Returns duplicate task error\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.success).to.eql(false);\r",
+                  "    pm.expect(json.error).to.eql(\"Task already exists\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", () => {\r",
+                  "    pm.response.to.have.header(\"Content-Type\");\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Comprar leche\",\r\n    \"completed\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/tasks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new task - Missing token (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 401\", () => {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Returns missing token error\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.success).to.eql(false);\r",
+                  "    pm.expect(json.error).to.eql(\"Token not provided\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", () => {\r",
+                  "    pm.response.to.have.header(\"Content-Type\");\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Comprar lechugas\",\r\n    \"completed\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/tasks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new task - Invalid token (401)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 401\", () => {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Returns invalid token error\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.success).to.eql(false);\r",
+                  "    pm.expect(json.error).to.eql(\"Invalid token\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", () => {\r",
+                  "    pm.response.to.have.header(\"Content-Type\");\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Comprar lechugas\",\r\n    \"completed\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -288,6 +446,16 @@
             "disableBodyPruning": true
           },
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "body": {
@@ -304,182 +472,6 @@
               "path": [
                 "api",
                 "tasks"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "tasks queried by ID(1)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status is 200\", () => {\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"show all tasks\", () => {\r",
-                  "    const json = pm.response.json();\r",
-                  "\r",
-                  "    pm.expect(json.success).to.eql(true);\r",
-                  "    pm.expect(json.results).to.be.an('array');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Each task has the expected properties\", () => {\r",
-                  "    const json = pm.response.json();\r",
-                  "\r",
-                  "    if (json.results.length > 0) {\r",
-                  "        const task = json.results[0];\r",
-                  "\r",
-                  "        pm.expect(task).to.have.property(\"id\");\r",
-                  "        pm.expect(task).to.have.property(\"title\");\r",
-                  "        pm.expect(task).to.have.property(\"completed\");\r",
-                  "        pm.expect(task).to.have.property(\"user_id\");\r",
-                  "        pm.expect(task).to.have.property(\"created_at\");\r",
-                  "    }\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"All tasks belong to the requested user\", () => {\r",
-                  "    const json = pm.response.json();\r",
-                  "\r",
-                  "    json.results.forEach(task => {\r",
-                  "        pm.expect(task.user_id).to.eql(1);\r",
-                  "    });\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Response is JSON\", () => {\r",
-                  "    pm.response.to.have.header(\"Content-Type\");\r",
-                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-                  "});"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": ""
-            },
-            "url": {
-              "raw": "http://localhost:4000/api/tasks?user_id=1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "tasks"
-              ],
-              "query": [
-                {
-                  "key": "user_id",
-                  "value": "1"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "tasks queried by ID (1) and completed (true)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status is 200\", () => {\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"show all tasks\", () => {\r",
-                  "    const json = pm.response.json();\r",
-                  "\r",
-                  "    pm.expect(json.success).to.eql(true);\r",
-                  "    pm.expect(json.results).to.be.an('array');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Each task has the expected properties\", () => {\r",
-                  "    const json = pm.response.json();\r",
-                  "\r",
-                  "    if (json.results.length > 0) {\r",
-                  "        const task = json.results[0];\r",
-                  "\r",
-                  "        pm.expect(task).to.have.property(\"id\");\r",
-                  "        pm.expect(task).to.have.property(\"title\");\r",
-                  "        pm.expect(task).to.have.property(\"completed\");\r",
-                  "        pm.expect(task).to.have.property(\"user_id\");\r",
-                  "        pm.expect(task).to.have.property(\"created_at\");\r",
-                  "    }\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"All tasks belong to the requested user\", () => {\r",
-                  "    const json = pm.response.json();\r",
-                  "\r",
-                  "    json.results.forEach(task => {\r",
-                  "        pm.expect(task.user_id).to.eql(1);\r",
-                  "    });\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"All tasks are completed\", () => {\r",
-                  "    const json = pm.response.json();\r",
-                  "\r",
-                  "    json.results.forEach(task => {\r",
-                  "        pm.expect(task.completed).to.eql(true);\r",
-                  "    });\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Response is JSON\", () => {\r",
-                  "    pm.response.to.have.header(\"Content-Type\");\r",
-                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-                  "});"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": ""
-            },
-            "url": {
-              "raw": "http://localhost:4000/api/tasks?user_id=1&completed=true",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "tasks"
-              ],
-              "query": [
-                {
-                  "key": "user_id",
-                  "value": "1"
-                },
-                {
-                  "key": "completed",
-                  "value": "true"
-                }
               ]
             }
           },
@@ -540,6 +532,16 @@
             "disableBodyPruning": true
           },
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "body": {
@@ -561,59 +563,6 @@
                 {
                   "key": "completed",
                   "value": "false"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Invalid user_id (400)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status is 400\", () => {\r",
-                  "    pm.response.to.have.status(400);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Returns user_id validation error\", () => {\r",
-                  "    const json = pm.response.json();\r",
-                  "\r",
-                  "    pm.expect(json.success).to.eql(false);\r",
-                  "    pm.expect(json.error).to.eql(\"user_id must be a number\");\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Response is JSON\", () => {\r",
-                  "    pm.response.to.have.header(\"Content-Type\");\r",
-                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-                  "});"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:4000/api/tasks?user_id=gato",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "tasks"
-              ],
-              "query": [
-                {
-                  "key": "user_id",
-                  "value": "gato"
                 }
               ]
             }
@@ -650,6 +599,16 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -668,6 +627,106 @@
                   "key": "completed",
                   "value": "gato"
                 }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "All tasks - Missing token (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 401\", () => {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Returns missing token error\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.success).to.eql(false);\r",
+                  "    pm.expect(json.error).to.eql(\"Token not provided\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", () => {\r",
+                  "    pm.response.to.have.header(\"Content-Type\");\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/api/tasks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all tasks - Invalid token (401)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 401\", () => {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Returns invalid token error\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.success).to.eql(false);\r",
+                  "    pm.expect(json.error).to.eql(\"Invalid token\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", () => {\r",
+                  "    pm.response.to.have.header(\"Content-Type\");\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:4000/api/tasks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "tasks"
               ]
             }
           },
@@ -707,6 +766,16 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PUT",
             "header": [],
             "body": {
@@ -719,7 +788,7 @@
               }
             },
             "url": {
-              "raw": "http://localhost:4000/api/tasks/7",
+              "raw": "http://localhost:4000/api/tasks/9",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -728,7 +797,7 @@
               "path": [
                 "api",
                 "tasks",
-                "7"
+                "9"
               ]
             }
           },
@@ -765,6 +834,16 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PUT",
             "header": [],
             "body": {
@@ -822,6 +901,16 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PUT",
             "header": [],
             "body": {
@@ -879,6 +968,16 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PUT",
             "header": [],
             "body": {
@@ -936,6 +1035,16 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PUT",
             "header": [],
             "body": {
@@ -958,6 +1067,126 @@
                 "api",
                 "tasks",
                 "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "edit a task - Invalid token (401)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 401\", () => {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Returns invalid token error\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.success).to.eql(false);\r",
+                  "    pm.expect(json.error).to.eql(\"Invalid token\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", () => {\r",
+                  "    pm.response.to.have.header(\"Content-Type\");\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Comprar tomates\",\r\n    \"completed\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/tasks/9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "tasks",
+                "9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "edit a task - Missing token (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 401\", () => {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Returns missing token error\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.success).to.eql(false);\r",
+                  "    pm.expect(json.error).to.eql(\"Token not provided\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", () => {\r",
+                  "    pm.response.to.have.header(\"Content-Type\");\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Comprar tomates\",\r\n    \"completed\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/tasks/9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "tasks",
+                "9"
               ]
             }
           },
@@ -997,6 +1226,16 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "DELETE",
             "header": [],
             "body": {
@@ -1004,7 +1243,7 @@
               "raw": ""
             },
             "url": {
-              "raw": "http://localhost:4000/api/tasks/8",
+              "raw": "http://localhost:4000/api/tasks/9",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -1013,7 +1252,7 @@
               "path": [
                 "api",
                 "tasks",
-                "8"
+                "9"
               ]
             }
           },
@@ -1049,6 +1288,16 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "DELETE",
             "header": [],
             "body": {
@@ -1101,6 +1350,16 @@
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "DELETE",
             "header": [],
             "body": {
@@ -1118,6 +1377,126 @@
                 "api",
                 "tasks",
                 "gato"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete a task - Missing token (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 401\", () => {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Returns missing token error\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.success).to.eql(false);\r",
+                  "    pm.expect(json.error).to.eql(\"Token not provided\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", () => {\r",
+                  "    pm.response.to.have.header(\"Content-Type\");\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Comprar tomates\",\r\n    \"completed\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/tasks/9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "tasks",
+                "9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete a task - Invalid token (401)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 401\", () => {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Returns invalid token error\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.success).to.eql(false);\r",
+                  "    pm.expect(json.error).to.eql(\"Invalid token\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", () => {\r",
+                  "    pm.response.to.have.header(\"Content-Type\");\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Comprar tomates\",\r\n    \"completed\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/tasks/9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "tasks",
+                "9"
               ]
             }
           },
@@ -1179,7 +1558,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"email\": \"taqui@correo.com\",\r\n    \"password\": \"12345678\"\r\n}",
+                  "raw": "{\r\n    \"email\": \"admin@correo.com\",\r\n    \"password\": \"contraseña\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1443,7 +1822,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"Edelmira\",\r\n    \"email\": \"mira@correo.com\",\r\n    \"password\": \"contraseña\"\r\n}",
+                  "raw": "{\r\n    \"name\": \"admin\",\r\n    \"email\": \"admin@correo.com\",\r\n    \"password\": \"contraseña\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
