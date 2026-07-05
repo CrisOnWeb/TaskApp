@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ls from '../services/localStorage';
 import TaskApp from '../pages/TaskApp/TaskApp';
+import Landing from '../pages/Landing/Landing';
 
 function App() {
   const [tasks, setTasks] = useState(
@@ -88,7 +89,8 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route path="/" element={<Landing />} />
+        <Route index element={<Landing />} />
+        {/*
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} /> */}
         <Route

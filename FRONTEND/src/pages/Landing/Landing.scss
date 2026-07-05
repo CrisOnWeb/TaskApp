@@ -1,0 +1,131 @@
+.hero {
+  padding-block: 2rem;
+  padding-inline: 2rem;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    var(--color-brand-light-soft) 100%
+  );
+
+  &__inner {
+    display: grid;
+    justify-content: center;
+
+    @media (width > 900px) {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding-block: var(--spacing-sm);
+    padding-inline: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-brand-light);
+    color: var(--color-brand);
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    &-icon {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  &__title {
+    margin-block: var(--spacing-md);
+
+    @media (width > 900px) {
+      font-size: 1.75rem;
+      max-width: 20ch;
+    }
+
+    @media (width > 1228px) {
+      font-size: var(--spacing-xxl);
+    }
+  }
+
+  &__highlight {
+    color: var(--color-brand);
+  }
+
+  &__text {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+
+    @media (width > 900) {
+      max-width: 40ch;
+    }
+
+    @media (width > 1228px) {
+      font-size: 1rem;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-block: var(--spacing-lg);
+  }
+
+  &__badges {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+    font-size: 0.75rem;
+
+    @media (width > 900px) {
+      margin-bottom: 0;
+    }
+
+    @media (width > 1228px) {
+      padding-inline-end: var(--spacing-xl);
+    }
+  }
+
+  &__badge {
+    max-width: 25ch;
+    &:not(:first-child) {
+      border-left: 1px solid var(--color-border);
+      padding-left: var(--spacing-lg);
+
+      @media (width > 1228px) {
+        padding-left: var(--spacing-xl);
+      }
+    }
+
+    &-title {
+      color: var(--color-brand-dark);
+      font-weight: 600;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    &-text {
+      color: var(--color-text-light);
+    }
+  }
+
+  &__image-wrapper {
+    width: fit-content;
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 20px 60px rgba(108, 62, 244, 0.12),
+      0 8px 24px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+  }
+}

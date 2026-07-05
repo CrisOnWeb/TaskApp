@@ -1,3 +1,4 @@
+import './TaskApp.scss';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import NewTask from '../../components/NewTask/NewTask';
@@ -27,7 +28,7 @@ const TaskApp = ({
   return (
     <>
       <Header search={search} setSearch={setSearch} />
-      <main className="main central-column">
+      <main className="main main--app central-column">
         <aside className="aside-menu">
           <NewTask
             newTaskInput={newTaskInput}
