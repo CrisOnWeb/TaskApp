@@ -42,11 +42,11 @@ const Landing = () => {
                 todo bajo control.
               </p>
               <div className="hero__buttons">
-                <Button variant="button--primary" to="/">
-                  Sign Up
+                <Button variant="button--primary" to="/signup">
+                  Registrarse
                 </Button>
-                <Button variant="button--secondary" to="/">
-                  Log In
+                <Button variant="button--secondary" to="/login">
+                  Iniciar sesión
                 </Button>
               </div>
               <div className="hero__badges">

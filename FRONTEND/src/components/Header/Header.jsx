@@ -1,14 +1,74 @@
 import './Header.scss';
+import { useLocation, useNavigate } from 'react-router';
+import HeaderNav from './HeaderNav';
 import logo from '../../assets/img/logo.png';
 
 const Header = ({ search, setSearch }) => {
+  const { pathname } = useLocation();
+
+  /*
+  const navigate = useNavigate();
+  const handleLogout = () => {
+  localStorage.removeItem('token');
+  navigate('/');
+};
+  */
+
+  // Array que contendrá los enlaces del Header
+  const navItems = [];
+
+  // Variables boolean que verifican la ruta
+  const isLanding = pathname === '/';
+  const isLogin = pathname === '/login';
+  const isSignup = pathname === '/signup';
+  const isApp = pathname === '/app';
+
+  // Objetos de navegación
+  const homeItem = { label: 'Inicio', to: '/', type: 'link' };
+
+  const loginItem = {
+    label: 'Iniciar sesión',
+    to: '/login',
+    type: 'button',
+    variant: 'button--secondary',
+  };
+
+  const signupItem = {
+    label: 'Registrarse',
+    to: '/signup',
+    type: 'button',
+    variant: 'button--primary',
+  };
+
+  /*
+  const logoutItem = {
+  label: 'Cerrar sesión',
+  type: 'button',
+  variant: 'button--secondary',
+  onClick: handleLogout,
+};
+  */
+
+  // Creamos objeto condicional según la ruta
+  if (isLanding) {
+    navItems.push(loginItem, signupItem);
+  } else if (isLogin) {
+    navItems.push(homeItem, signupItem);
+  } else if (isSignup) {
+    navItems.push(homeItem, loginItem);
+  } else if (isApp) {
+    // navItems.push(logoutItem);
+  }
+
   const handleSearchInput = (ev) => {
     setSearch(ev.target.value);
   };
 
   return (
-    <header className="header">
-      <div className="header__inner central-column">
+    <header className={`header ${isApp ? 'header-app' : ''}`}>
+      <div
+        className={`header__inner central-column ${isApp ? 'header-app__inner' : ''}`}
+      >
         <div className="header__logoAndName">
           <img
             className="header__logo"
@@ -17,32 +77,25 @@ const Header = ({ search, setSearch }) => {
           />
           <h1 className="header__name">TaskApp</h1>
         </div>
-        <form className="header__form">
-          <label className="visually-hidden" htmlFor="search">
-            Buscador de tareas
-          </label>
-          <input
-            className="header__input"
-            type="search"
-            name="search"
-            id="search"
-            placeholder="Buscar tareas..."
-            value={search}
-            onChange={handleSearchInput}
-          />
-        </form>
-        <button className="header__hamb" aria-label="Menú">
-          <svg
-            aria-hidden="true"
-            className="hamb-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="512"
-            height="512"
-            viewBox="0 0 1024 1024"
-          >
-            <path d="M27 193.6c-8.2-8.2-12.2-18.6-12.2-31.2s4-23 12.2-31.2S45.6 119 58.2 119h912.4c12.6 0 23 4 31.2 12.2s12.2 18.6 12.2 31.2s-4 23-12.2 31.2s-18.6 12.2-31.2 12.2H58.2c-12.6 0-23-4-31.2-12.2zm974.8 285.2c8.2 8.2 12.2 18.6 12.2 31.2s-4 23-12.2 31.2s-18.6 12.2-31.2 12.2H58.2c-12.6 0-23-4-31.2-12.2S14.8 522.6 14.8 510s4-23 12.2-31.2s18.6-12.2 31.2-12.2h912.4c12.6 0 23 4 31.2 12.2zm0 347.4c8.2 8.2 12.2 18.6 12.2 31.2s-4 23-12.2 31.2s-18.6 12.2-31.2 12.2H58.2c-12.6 0-23-4-31.2-12.2S14.8 870 14.8 857.4s4-23 12.2-31.2S45.6 814 58.2 814h912.4c12.6 0 23 4.2 31.2 12.2z" />
-          </svg>
-        </button>
+
+        {isApp && (
+          <form className="header__form">
+            <label className="visually-hidden" htmlFor="search">
+              Buscador de tareas
+            </label>
+            <input
+              className="header__input"
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Buscar tareas..."
+              value={search}
+              onChange={handleSearchInput}
+            />
+          </form>
+        )}
+
+        <HeaderNav navItems={navItems} />
       </div>
     </header>
   );

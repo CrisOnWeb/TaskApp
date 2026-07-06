@@ -1,0 +1,100 @@
+.header-nav {
+  // Menú tablet/desktop
+  &__list {
+    display: none;
+
+    @media (width > 768px) {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: var(--spacing-md);
+      list-style-type: none;
+    }
+  }
+
+  &__link {
+    margin-right: var(--spacing-lg);
+    color: var(--color-text-light);
+    font-size: 1.15rem;
+    font-weight: 500;
+    text-decoration-line: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-brand);
+    }
+  }
+
+  // Menú mobile
+  &-mobile {
+    position: absolute;
+    top: calc(100% - 0.25rem);
+    right: 2rem;
+    padding-inline: var(--spacing-md);
+    padding-block: var(--spacing-md);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+
+    background-color: white;
+
+    @media (width > 768px) {
+      display: none;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      list-style-type: none;
+    }
+
+    &__item {
+      padding-inline: var(--radius-xl);
+      padding-block: var(--radius-sm);
+      border-radius: var(--radius-sm);
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--color-brand-light);
+      }
+    }
+
+    &__link {
+      color: var(--color-brand);
+      font-weight: 500;
+      text-decoration-line: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--color-brand-dark);
+      }
+    }
+  }
+  &__hamb {
+    grid-area: menu;
+    padding-inline: var(--spacing-md);
+    padding-block: var(--radius-md);
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-brand-light);
+    }
+
+    @media (width > 768px) {
+      display: none;
+    }
+
+    &--open {
+      background-color: var(--color-brand-light);
+    }
+  }
+}
+
+.hamb-icon {
+  width: 28px;
+  height: auto;
+  fill: var(--color-brand);
+}
