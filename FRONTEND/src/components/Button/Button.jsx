@@ -1,23 +1,28 @@
 import './Button.scss';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
-const Button = ({ children, variant, to, type, onClick }) => {
+const Button = ({
+  children,
+  variant = '',
+  to,
+  type = 'button',
+  onClick,
+  isNav = false,
+}) => {
+  if (to) {
+    const Component = isNav ? NavLink : Link;
+
+    return (
+      <Component to={to} className={`button ${variant}`}>
+        {children}
+      </Component>
+    );
+  }
+
   return (
-    <>
-      {to ? (
-        <Link className={`button ${variant}`} to={to}>
-          {children}
-        </Link>
-      ) : (
-        <button
-          type={type ? type : 'button'}
-          className={`button ${variant}`}
-          onClick={onClick}
-        >
-          {children}
-        </button>
-      )}
-    </>
+    <button type={type} className={`button ${variant}`} onClick={onClick}>
+      {children}
+    </button>
   );
 };
 
