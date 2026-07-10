@@ -1,6 +1,6 @@
 .hero {
-  padding-block: 2rem;
-  padding-inline: 2rem;
+  padding-block: var(--spacing-xl);
+  padding-inline: var(--spacing-xl);
 
   background: linear-gradient(
     90deg,
