@@ -1,0 +1,110 @@
+.signup {
+  min-width: 250px;
+  max-width: 600px;
+  padding-block: var(--spacing-xl);
+  padding-inline: var(--spacing-xl);
+  margin-block: var(--spacing-md);
+  margin-inline: var(--spacing-md);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  box-shadow:
+    0 12px 30px rgba(108, 62, 244, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+
+  &__title {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+
+  &__description {
+    padding-block: var(--spacing-sm);
+    color: var(--color-text-light);
+  }
+
+  &__form {
+    padding-block: var(--spacing-sm);
+
+    &-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      padding-block: var(--spacing-sm);
+
+      &:last-of-type {
+        margin-bottom: var(--spacing-md);
+      }
+    }
+  }
+
+  &__label {
+    font-weight: 600;
+  }
+
+  &__input {
+    width: 100%;
+    padding-block: var(--spacing-sm);
+    padding-inline: var(--spacing-md);
+    border: 1px solid var(--color-text-muted);
+    border-radius: var(--radius-sm);
+  }
+
+  &__password-wrapper {
+    position: relative;
+  }
+
+  &__password-toggle {
+    position: absolute;
+    inset-block: 0;
+    right: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &__password-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--color-text-muted);
+  }
+
+  &__login {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    font-size: 0.85rem;
+
+    &-text {
+      color: var(--color-text-light);
+    }
+
+    &-link {
+      color: var(--color-brand);
+      font-weight: 600;
+      text-decoration-line: none;
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: var(--color-brand-dark);
+      }
+    }
+  }
+}
+
+.signup__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-brand-light-soft) 0%,
+    var(--color-brand-light) 100%
+  );
+}
