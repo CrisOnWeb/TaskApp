@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { validateLogin } from '../../utils/validation';
 import './Login.scss';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Button from '../../components/Button/Button';
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({
+  const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  // Mensajes de error
+  const [errors, setErrors] = useState({});
 
   // Visibilizar/ocultar contraseña
   const [showPassword, setShowPassword] = useState(false);
@@ -18,11 +22,22 @@ const Login = () => {
     const value = event.target.value;
     const name = event.target.name;
 
-    setLoginData({ ...loginData, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // validar formulario
+    const validationErrors = validateLogin(formData);
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setErrors({});
+
+    // fetch
   };
 
   return (
@@ -34,22 +49,23 @@ const Login = () => {
           <p className="login__description">
             Bienvenida de nuevo. Continúa donde lo dejaste.
           </p>
-          <form className="login__form" onSubmit={handleSubmit}>
+          <form className="login__form" noValidate onSubmit={handleSubmit}>
             <div className="login__form-section">
               <label className="login__label" htmlFor="email">
                 Correo electrónico
               </label>
               <input
-                className="login__input"
+                className={`signup__input ${errors.email && 'is-error'}`}
                 type="email"
                 id="email"
                 name="email"
                 placeholder="correo@correo.com"
                 required
                 autoComplete="email"
-                value={loginData.email}
+                value={formData.email}
                 onChange={handleInputChange}
               />
+              {errors.email && <p className="text-error">{errors.email}</p>}
             </div>
             <div className="login__form-section">
               <label className="login__label" htmlFor="password">
@@ -57,7 +73,7 @@ const Login = () => {
               </label>
               <div className="login__password-wrapper">
                 <input
-                  className="login__input"
+                  className={`signup__input ${errors.password && 'is-error'}`}
                   type={showPassword ? 'text' : 'password'}
                   id="password"
                   name="password"
@@ -65,7 +81,7 @@ const Login = () => {
                   placeholder="********"
                   required
                   autoComplete="current-password"
-                  value={loginData.password}
+                  value={formData.password}
                   onChange={handleInputChange}
                 />
                 <button
@@ -97,6 +113,9 @@ const Login = () => {
                   </svg>
                 </button>
               </div>
+              {errors.password && (
+                <p className="text-error">{errors.password}</p>
+              )}
             </div>
             <Button type="submit" variant="button--primary button--full">
               Iniciar sesión
