@@ -1,3 +1,18 @@
 .hidden {
   display: none;
 }
+
+// input con error
+.is-error {
+  border-color: var(--color-error);
+
+  &:focus {
+    outline: 1px solid var(--color-error);
+  }
+}
+
+// texto de error de formulario
+.text-error {
+  color: var(--color-error);
+  font-size: 0.8rem;
+}
