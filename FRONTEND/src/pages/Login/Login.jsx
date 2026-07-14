@@ -1,31 +1,49 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { validateLogin } from '../../utils/validation';
+import authService from '../../services/authService';
 import './Login.scss';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Button from '../../components/Button/Button';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
-  // Mensajes de error
+  // Mensajes de error frontend
   const [errors, setErrors] = useState({});
+
+  // Mensajes de error backend
+  const [serverError, setServerError] = useState('');
 
   // Visibilizar/ocultar contraseña
   const [showPassword, setShowPassword] = useState(false);
+
+  // Mensajes de error del servidor
+  const messages = {
+    INVALID_CREDENTIALS:
+      'El correo electrónico o la contraseña son incorrectos.',
+
+    INCOMPLETE_DATA: 'Debes completar todos los campos.',
+  };
 
   const handleInputChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
 
     setFormData({ ...formData, [name]: value });
+
+    setErrors({ ...errors, [name]: '' });
+
+    setServerError('');
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // validar formulario
     const validationErrors = validateLogin(formData);
@@ -38,6 +56,20 @@ const Login = () => {
     setErrors({});
 
     // fetch
+    try {
+      const { success, code } = await authService.login(formData);
+      if (success) {
+        setServerError('');
+        navigate('/app');
+      } else {
+        setServerError(messages[code]);
+      }
+    } catch (error) {
+      console.error(error);
+      setServerError(
+        'No se ha podido conectar con el servidor. Inténtalo de nuevo más tarde.'
+      );
+    }
   };
 
   return (
@@ -55,17 +87,23 @@ const Login = () => {
                 Correo electrónico
               </label>
               <input
-                className={`signup__input ${errors.email && 'is-error'}`}
+                className={`login__input ${errors.email && 'is-error'}`}
                 type="email"
                 id="email"
                 name="email"
                 placeholder="correo@correo.com"
                 required
                 autoComplete="email"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'email-error' : undefined}
                 value={formData.email}
                 onChange={handleInputChange}
               />
-              {errors.email && <p className="text-error">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-error" id="email-error">
+                  {errors.email}
+                </p>
+              )}
             </div>
             <div className="login__form-section">
               <label className="login__label" htmlFor="password">
@@ -73,7 +111,7 @@ const Login = () => {
               </label>
               <div className="login__password-wrapper">
                 <input
-                  className={`signup__input ${errors.password && 'is-error'}`}
+                  className={`login__input ${errors.password && 'is-error'}`}
                   type={showPassword ? 'text' : 'password'}
                   id="password"
                   name="password"
@@ -81,6 +119,10 @@ const Login = () => {
                   placeholder="********"
                   required
                   autoComplete="current-password"
+                  aria-invalid={!!errors.password}
+                  aria-describedby={
+                    errors.password ? 'password-error' : undefined
+                  }
                   value={formData.password}
                   onChange={handleInputChange}
                 />
@@ -114,10 +156,21 @@ const Login = () => {
                 </button>
               </div>
               {errors.password && (
-                <p className="text-error">{errors.password}</p>
+                <p className="text-error" id="password-error">
+                  {errors.password}
+                </p>
               )}
             </div>
-            <Button type="submit" variant="button--primary button--full">
+            {serverError && (
+              <p className="text-error server-error" role="alert">
+                {serverError}
+              </p>
+            )}
+            <Button
+              className="button"
+              type="submit"
+              variant="button--primary button--full"
+            >
               Iniciar sesión
             </Button>
           </form>
