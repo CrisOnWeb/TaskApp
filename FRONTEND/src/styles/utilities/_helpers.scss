@@ -16,3 +16,8 @@
   color: var(--color-error);
   font-size: 0.8rem;
 }
+
+// espaciado mensajes de error del servidor
+.server-error {
+  margin-bottom: var(--spacing-md);
+}

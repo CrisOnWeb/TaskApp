@@ -28,7 +28,7 @@ const staticServerPath = path.join(__dirname, '../public');
 server.use(express.static(staticServerPath));
 
 // Arrancar servidor en un puerto
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 server.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
@@ -447,6 +447,7 @@ server.post('/api/login', async (req, res) => {
     return res.status(400).json({
       success: false,
       error: 'Incomplete data',
+      code: 'INCOMPLETE_DATA',
     });
   }
 
@@ -467,6 +468,7 @@ server.post('/api/login', async (req, res) => {
       return res.status(401).json({
         success: false,
         error: 'Invalid email or password',
+        code: 'INVALID_CREDENTIALS',
       });
     }
 
@@ -480,6 +482,7 @@ server.post('/api/login', async (req, res) => {
       return res.status(401).json({
         success: false,
         error: 'Invalid email or password',
+        code: 'INVALID_CREDENTIALS',
       });
     }
 
@@ -540,7 +543,8 @@ server.get('/api/profile', authenticateToken, async (req, res) => {
   }
 });
 
-//
-server.get('*', (req, res) => {
+// Permite que React Router gestione las rutas del frontend
+// Si la ruta no es una API ni un archivo estático, devuelve index.html para que React Router gestione la navegación
+server.get('/*splat', (req, res) => {
   res.sendFile(path.join(staticServerPath, 'index.html'));
 });
