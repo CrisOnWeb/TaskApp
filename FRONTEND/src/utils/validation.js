@@ -30,10 +30,10 @@ export const validateLogin = (formData) => {
 export const validateSignup = (formData) => {
   const errors = {};
 
-  if (!formData.username.trim()) {
-    errors.username = 'El nombre de usuario es obligatorio.';
-  } else if (formData.username.length < 3) {
-    errors.username = 'El nombre de usuario debe tener al menos 3 caracteres.';
+  if (!formData.name.trim()) {
+    errors.name = 'El nombre de usuario es obligatorio.';
+  } else if (formData.name.length < 3) {
+    errors.name = 'El nombre de usuario debe tener al menos 3 caracteres.';
   }
 
   if (!formData.email.trim()) {
@@ -42,7 +42,7 @@ export const validateSignup = (formData) => {
     errors.email = 'Introduce un correo electrónico válido.';
   }
 
-  if (!formData.password) {
+  if (!formData.password.trim()) {
     errors.password = 'La contraseña es obligatoria.';
   } else if (formData.password.length < 8) {
     errors.password = 'La contraseña debe tener al menos 8 caracteres.';

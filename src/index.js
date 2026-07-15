@@ -398,7 +398,8 @@ server.post('/api/signup', async (req, res) => {
     if (userResults.length > 0) {
       return res.status(409).json({
         success: false,
-        error: 'The user already exists in the database',
+        error: 'The email is already registered',
+        code: 'EMAIL_ALREADY_EXISTS',
       });
     }
 

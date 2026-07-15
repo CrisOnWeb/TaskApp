@@ -1,11 +1,12 @@
 import fetchData from './api';
 import ls from './localStorage';
 
-const URL = 'http://localhost:4000';
+const API_URL =
+  import.meta.env.MODE === 'development' ? 'http://localhost:4000' : '';
 const TOKEN_KEY = 'token';
 
 const login = async (formData) => {
-  const response = await fetchData('/api/login', {
+  const response = await fetchData(`${API_URL}/api/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -18,4 +19,18 @@ const login = async (formData) => {
   return response;
 };
 
-export default { login };
+const signup = async (formData) => {
+  const response = await fetchData(`${API_URL}/api/signup`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  });
+
+  if (response.success) {
+    ls.set(TOKEN_KEY, response.token);
+  }
+
+  return response;
+};
+
+export default { login, signup };

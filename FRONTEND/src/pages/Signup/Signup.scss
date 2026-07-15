@@ -1,6 +1,5 @@
 .signup {
-  min-width: 250px;
-  max-width: 600px;
+  width: min(100%, 470px);
   padding-block: var(--spacing-xl);
   padding-inline: var(--spacing-xl);
   margin-block: var(--spacing-md);
