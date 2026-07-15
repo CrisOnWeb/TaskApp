@@ -48,6 +48,7 @@ const Login = () => {
     // validar formulario
     const validationErrors = validateLogin(formData);
 
+    // Convertimos el objeto en un array para verificar si hay errores
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -65,6 +66,7 @@ const Login = () => {
         setServerError(messages[code]);
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
       setServerError(
         'No se ha podido conectar con el servidor. Inténtalo de nuevo más tarde.'
@@ -161,11 +163,13 @@ const Login = () => {
                 </p>
               )}
             </div>
+
             {serverError && (
               <p className="text-error server-error" role="alert">
                 {serverError}
               </p>
             )}
+
             <Button
               className="button"
               type="submit"

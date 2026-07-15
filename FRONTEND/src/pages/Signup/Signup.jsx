@@ -2,32 +2,45 @@ import './Signup.scss';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { validateSignup } from '../../utils/validation';
+import authService from '../../services/authService';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Button from '../../components/Button/Button';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
 
-  // Mensajes de error
+  // Mensajes de error frontend
   const [errors, setErrors] = useState({});
+
+  // Mensajes de error backend
+  const [serverError, setServerError] = useState('');
 
   // Visibilizar/ocultar contraseña
   const [showPassword, setShowPassword] = useState(false);
+
+  // Mensajes de error del servidor
+  const messages = {
+    EMAIL_ALREADY_EXISTS: 'Ya existe una cuenta con ese correo electrónico.',
+  };
 
   const handleInputChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
 
     setFormData({ ...formData, [name]: value });
+
+    setErrors({ ...errors, [name]: '' });
+
+    setServerError('');
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // validar formulario
     const validationErrors = validateSignup(formData);
@@ -41,6 +54,20 @@ const Signup = () => {
     setErrors({});
 
     // fetch
+    try {
+      const { success, code } = await authService.signup(formData);
+      if (success) {
+        setServerError('');
+      } else {
+        setServerError(messages[code]);
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+      setServerError(
+        'No se ha podido conectar con el servidor. Inténtalo de nuevo más tarde.'
+      );
+    }
   };
 
   return (
@@ -55,22 +82,20 @@ const Signup = () => {
 
           <form className="signup__form" noValidate onSubmit={handleSubmit}>
             <div className="signup__form-section">
-              <label className="signup__label" htmlFor="username">
+              <label className="signup__label" htmlFor="name">
                 Nombre de usuario/a
               </label>
               <input
-                className={`signup__input ${errors.username && 'is-error'}`}
+                className={`signup__input ${errors.name && 'is-error'}`}
                 type="text"
-                id="username"
-                name="username"
+                id="name"
+                name="name"
                 placeholder="paquita_la_del_barrio"
                 required
-                value={formData.username}
+                value={formData.name}
                 onChange={handleInputChange}
               />
-              {errors.username && (
-                <p className="text-error">{errors.username}</p>
-              )}
+              {errors.name && <p className="text-error">{errors.name}</p>}
             </div>
 
             <div className="signup__form-section">
@@ -104,6 +129,7 @@ const Signup = () => {
                   minLength={8}
                   placeholder="********"
                   required
+                  autoComplete="new-password"
                   value={formData.password}
                   onChange={handleInputChange}
                 />
@@ -154,6 +180,7 @@ const Signup = () => {
                   minLength={8}
                   placeholder="********"
                   required
+                  autoComplete="new-password"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                 />
@@ -190,6 +217,12 @@ const Signup = () => {
                 <p className="text-error">{errors.confirmPassword}</p>
               )}
             </div>
+
+            {serverError && (
+              <p className="text-error server-error " role="alert">
+                {serverError}
+              </p>
+            )}
 
             <Button type="submit" variant="button--primary button--full">
               Registrarse
