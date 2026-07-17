@@ -33,4 +33,8 @@ const signup = async (formData) => {
   return response;
 };
 
-export default { login, signup };
+const isAuthenticated = () => {
+  return !!ls.get('token', null);
+};
+
+export default { login, signup, isAuthenticated };

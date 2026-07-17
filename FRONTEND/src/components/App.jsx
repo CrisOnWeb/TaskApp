@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import ls from '../services/localStorage';
+import authService from '../services/authService';
 import TaskApp from '../pages/TaskApp/TaskApp';
 import Landing from '../pages/Landing/Landing';
 import Login from '../pages/Login/Login';
@@ -97,23 +98,27 @@ function App() {
         <Route
           path="/app"
           element={
-            <TaskApp
-              search={search}
-              setSearch={setSearch}
-              newTaskInput={newTaskInput}
-              setNewTaskInput={setNewTaskInput}
-              addTask={addTask}
-              filter={filter}
-              handleFilterChange={handleFilterChange}
-              pendingTasksSummary={pendingTasksSummary}
-              completedTasksSummary={completedTasksSummary}
-              numberOfPendingTasks={numberOfPendingTasks}
-              numberOfCompletedTasks={numberOfCompletedTasks}
-              searchedPendingTasks={searchedPendingTasks}
-              searchedCompletedTasks={searchedCompletedTasks}
-              toggleTask={toggleTask}
-              deleteTask={deleteTask}
-            />
+            authService.isAuthenticated() ? (
+              <TaskApp
+                search={search}
+                setSearch={setSearch}
+                newTaskInput={newTaskInput}
+                setNewTaskInput={setNewTaskInput}
+                addTask={addTask}
+                filter={filter}
+                handleFilterChange={handleFilterChange}
+                pendingTasksSummary={pendingTasksSummary}
+                completedTasksSummary={completedTasksSummary}
+                numberOfPendingTasks={numberOfPendingTasks}
+                numberOfCompletedTasks={numberOfCompletedTasks}
+                searchedPendingTasks={searchedPendingTasks}
+                searchedCompletedTasks={searchedCompletedTasks}
+                toggleTask={toggleTask}
+                deleteTask={deleteTask}
+              />
+            ) : (
+              <Navigate to="/login" replace />
+            )
           }
         />
       </Routes>
