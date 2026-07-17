@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import authService from '../services/authService';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import TaskApp from '../pages/TaskApp/TaskApp';
 import Landing from '../pages/Landing/Landing';
 import Login from '../pages/Login/Login';
@@ -15,11 +15,9 @@ function App() {
         <Route
           path="/app"
           element={
-            authService.isAuthenticated() ? (
+            <ProtectedRoute>
               <TaskApp />
-            ) : (
-              <Navigate to="/login" replace />
-            )
+            </ProtectedRoute>
           }
         />
       </Routes>
