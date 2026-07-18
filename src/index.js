@@ -385,6 +385,7 @@ server.post('/api/signup', async (req, res) => {
 
   // Declaramos connection para poder usarlo en try y en finally
   let connection;
+
   try {
     // recuperar datos del frontend
     const { name, email, password } = req.body;
@@ -393,7 +394,7 @@ server.post('/api/signup', async (req, res) => {
     let sql = 'SELECT id FROM users WHERE email = ?;';
 
     connection = await getConnection();
-    const [userResults] = await connection.query(sql, email);
+    const [userResults] = await connection.query(sql, [email]);
 
     if (userResults.length > 0) {
       return res.status(409).json({
@@ -406,25 +407,54 @@ server.post('/api/signup', async (req, res) => {
     // Crear hash de la password
     const passwordHash = await bcrypt.hash(password, 10);
 
-    // Guardar usuario
-    sql = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?);';
+    // A partir de aquí empieza la transacción
+    // La transacción garantiza que el usuario y sus tareas iniciales
+    // se creen como una única operación. Si algo falla, se deshacen ambos cambios.
+    await connection.beginTransaction();
 
-    const [registerResult] = await connection.execute(sql, [
-      name,
-      email,
-      passwordHash,
-    ]);
+    // Se crea fuera del try porque se utilizará después de la transacción para generar el JWT
+    let userId;
+
+    try {
+      // Guardar usuario
+      sql = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?);';
+
+      const [registerResult] = await connection.execute(sql, [
+        name,
+        email,
+        passwordHash,
+      ]);
+
+      userId = registerResult.insertId;
+
+      // Crear tareas iniciales
+      sql = `INSERT INTO tasks (title, completed, user_id)
+            VALUES
+              ('Aprender a utilizar TaskApp', false, ?),
+              ('Crear una nueva tarea', false, ?),
+              ('Eliminar una tarea', false, ?);`;
+      await connection.execute(sql, [userId, userId, userId]);
+
+      // Confirmar todos los cambios
+      await connection.commit();
+    } catch (error) {
+      // Deshacer todos los cambios realizados desde beginTransaction()
+      await connection.rollback();
+
+      // Propagar el error al catch externo para responder con un 500
+      throw error;
+    }
 
     // Generar token
     const payload = {
-      sub: registerResult.insertId,
+      sub: userId,
     };
 
     const token = generateToken(payload);
 
     res.status(201).json({
       success: true,
-      userId: registerResult.insertId,
+      userId,
       token,
     });
   } catch (error) {
