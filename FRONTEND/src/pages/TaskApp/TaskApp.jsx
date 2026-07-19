@@ -1,8 +1,6 @@
 import './TaskApp.scss';
 import { useState, useEffect } from 'react';
 import tasksService from '../../services/tasksService';
-import authService from '../../services/authService';
-import ls from '../../services/localStorage';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import NewTask from '../../components/NewTask/NewTask';
@@ -13,28 +11,20 @@ import FilterTasks from '../../components/FilterTasks/FilterTasks';
 import TaskSummary from '../../components/TaskSummary/TaskSummary';
 
 const TaskApp = () => {
-  const [tasks, setTasks] = useState(
-    ls.get('data', [
-      {
-        id: crypto.randomUUID(),
-        text: 'Aprender a utilizar TaskApp',
-        completed: false,
-      },
-      {
-        id: crypto.randomUUID(),
-        text: 'Crear una nueva tarea',
-        completed: false,
-      },
-      { id: crypto.randomUUID(), text: 'Eliminar una tarea', completed: false },
-    ])
-  );
+  const [tasks, setTasks] = useState([]);
   const [newTaskInput, setNewTaskInput] = useState('');
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
 
   useEffect(() => {
-    ls.set('data', tasks);
-  }, [tasks]);
+    const loadTasks = async () => {
+      const data = await tasksService.getTasks();
+
+      setTasks(data.results);
+    };
+
+    loadTasks();
+  }, []);
 
   const normalizeText = (text) => {
     return text

@@ -21,7 +21,7 @@ const TaskItem = ({ task, onToggleTask, onDeleteTask }) => {
         className={`tasks__label ${task.completed ? 'completed' : ''}`}
         htmlFor="task"
       >
-        {task.text}
+        {task.title}
       </label>
       <button
         className="tasks__btn"
