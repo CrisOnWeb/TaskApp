@@ -72,20 +72,46 @@ const TaskApp = () => {
     };
 
     // POST al backend
-    const response = await tasksService.postTasks(newTask);
+    const response = await tasksService.createTask(newTask);
 
     // Añadir al estado la tarea devuelta por el backend
     setTasks((prevTasks) => [...prevTasks, response.result]);
   };
 
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+  const deleteTask = async (id) => {
+    // DELETE al backend
+    await tasksService.deleteTask(id);
+
+    // Eliminar del estado la misma tarea
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
-  const toggleTask = (id) => {
-    return setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+  const toggleTask = async (id) => {
+    // Busco la tarea en el estado
+    const task = tasks.find((task) => task.id === id);
+
+    // Si la task no existiera
+    if (!task) return;
+
+    // Creo el objeto a enviar al backend
+    const updatedTask = {
+      title: task.title,
+      completed: !task.completed,
+    };
+
+    // PUT al backend
+    await tasksService.updateTask(id, updatedTask);
+
+    // Modifico completed de la tarea en el estado
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              title: updatedTask.title,
+              completed: updatedTask.completed,
+            }
+          : task
       )
     );
   };

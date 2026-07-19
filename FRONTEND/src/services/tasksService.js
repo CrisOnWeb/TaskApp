@@ -10,7 +10,7 @@ const getTasks = async () => {
   return response;
 };
 
-const postTasks = async (newTask) => {
+const createTask = async (newTask) => {
   const response = await fetchData(
     `${API_URL}/api/tasks`,
     {
@@ -24,4 +24,31 @@ const postTasks = async (newTask) => {
   return response;
 };
 
-export default { getTasks, postTasks };
+const updateTask = async (id, taskData) => {
+  const response = await fetchData(
+    `${API_URL}/api/tasks/${id}`,
+    {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(taskData),
+    },
+    true
+  );
+
+  return response;
+};
+
+const deleteTask = async (id) => {
+  const response = await fetchData(
+    `${API_URL}/api/tasks/${id}`,
+    {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    },
+    true
+  );
+
+  return response;
+};
+
+export default { getTasks, createTask, updateTask, deleteTask };
