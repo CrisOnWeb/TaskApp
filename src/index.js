@@ -145,9 +145,15 @@ server.post('/api/tasks', authenticateToken, async (req, res) => {
       completed,
     ]);
 
+    sql = 'SELECT id, title, completed, created_at FROM tasks WHERE id = ?;';
+
+    const [rows] = await connection.query(sql, [taskInserted.insertId]);
+
+    const task = rows[0];
+
     res.status(201).json({
       success: true,
-      taskId: taskInserted.insertId,
+      result: task,
     });
   } catch (error) {
     console.error(error);
@@ -189,7 +195,7 @@ server.get('/api/tasks', authenticateToken, async (req, res) => {
 
     // Creamos query genérica por si no nos pasan queries
     let sql =
-      'SELECT id, title, completed, created_at, user_id FROM tasks WHERE user_id = ?;';
+      'SELECT id, title, completed, created_at FROM tasks WHERE user_id = ?;';
 
     // Creamos array de params
     const params = [user_id];
@@ -198,7 +204,7 @@ server.get('/api/tasks', authenticateToken, async (req, res) => {
     if (completed !== undefined) {
       params.push(completedBoolean);
       sql =
-        'SELECT id, title, completed, created_at, user_id FROM tasks WHERE user_id = ? AND completed = ?;';
+        'SELECT id, title, completed, created_at FROM tasks WHERE user_id = ? AND completed = ?;';
     }
 
     connection = await getConnection();

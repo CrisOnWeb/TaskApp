@@ -16,6 +16,7 @@ const TaskApp = () => {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
 
+  // Recuperar tareas del servidor
   useEffect(() => {
     const loadTasks = async () => {
       const data = await tasksService.getTasks();
@@ -64,8 +65,17 @@ const TaskApp = () => {
   const pendingTasksSummary = pendingTasks.length;
   const completedTasksSummary = completedTasks.length;
 
-  const addTask = (newTask) => {
-    setTasks([...tasks, newTask]);
+  const addTask = async (title) => {
+    // Creamos el objeto que espera la API
+    const newTask = {
+      title,
+    };
+
+    // POST al backend
+    const response = await tasksService.postTasks(newTask);
+
+    // Añadir al estado la tarea devuelta por el backend
+    setTasks((prevTasks) => [...prevTasks, response.result]);
   };
 
   const deleteTask = (id) => {
