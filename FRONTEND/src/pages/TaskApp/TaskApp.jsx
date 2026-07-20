@@ -1,5 +1,6 @@
 import './TaskApp.scss';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import tasksService from '../../services/tasksService';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -9,6 +10,7 @@ import PendingIcon from '../../components/icons/PendingIcon';
 import CompletedIcon from '../../components/icons/CompletedIcon';
 import FilterTasks from '../../components/FilterTasks/FilterTasks';
 import TaskSummary from '../../components/TaskSummary/TaskSummary';
+import authService from '../../services/authService';
 
 const TaskApp = () => {
   const [tasks, setTasks] = useState([]);
@@ -16,16 +18,26 @@ const TaskApp = () => {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
 
+  const navigate = useNavigate();
+
   // Recuperar tareas del servidor
   useEffect(() => {
     const loadTasks = async () => {
-      const data = await tasksService.getTasks();
+      try {
+        const data = await tasksService.getTasks();
 
-      setTasks(data.results);
+        setTasks(data.results);
+      } catch (error) {
+        if (error.status === 401) {
+          authService.logoutUser();
+          navigate('/login', { replace: true });
+          return;
+        }
+      }
     };
 
     loadTasks();
-  }, []);
+  }, [navigate]);
 
   const normalizeText = (text) => {
     return text
@@ -65,6 +77,7 @@ const TaskApp = () => {
   const pendingTasksSummary = pendingTasks.length;
   const completedTasksSummary = completedTasks.length;
 
+  // Añadir tarea
   const addTask = async (title) => {
     // Creamos el objeto que espera la API
     const newTask = {
@@ -72,20 +85,38 @@ const TaskApp = () => {
     };
 
     // POST al backend
-    const response = await tasksService.createTask(newTask);
+    try {
+      const response = await tasksService.createTask(newTask);
 
-    // Añadir al estado la tarea devuelta por el backend
-    setTasks((prevTasks) => [...prevTasks, response.result]);
+      // Añadir al estado la tarea devuelta por el backend
+      setTasks((prevTasks) => [...prevTasks, response.result]);
+    } catch (error) {
+      if (error.status === 401) {
+        authService.logoutUser();
+        navigate('/login', { replace: true });
+        return;
+      }
+    }
   };
 
+  // Borrar tarea
   const deleteTask = async (id) => {
-    // DELETE al backend
-    await tasksService.deleteTask(id);
+    try {
+      // DELETE al backend
+      await tasksService.deleteTask(id);
 
-    // Eliminar del estado la misma tarea
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+      // Eliminar del estado la misma tarea
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    } catch (error) {
+      if (error.status === 401) {
+        authService.logoutUser();
+        navigate('/login', { replace: true });
+        return;
+      }
+    }
   };
 
+  // Modificar tarea
   const toggleTask = async (id) => {
     // Busco la tarea en el estado
     const task = tasks.find((task) => task.id === id);
@@ -100,20 +131,28 @@ const TaskApp = () => {
     };
 
     // PUT al backend
-    await tasksService.updateTask(id, updatedTask);
+    try {
+      await tasksService.updateTask(id, updatedTask);
 
-    // Modifico completed de la tarea en el estado
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id
-          ? {
-              ...task,
-              title: updatedTask.title,
-              completed: updatedTask.completed,
-            }
-          : task
-      )
-    );
+      // Modifico completed de la tarea en el estado
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id
+            ? {
+                ...task,
+                title: updatedTask.title,
+                completed: updatedTask.completed,
+              }
+            : task
+        )
+      );
+    } catch (error) {
+      if (error.status === 401) {
+        authService.logoutUser();
+        navigate('/login', { replace: true });
+        return;
+      }
+    }
   };
 
   const handleFilterChange = (status) => {

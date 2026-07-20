@@ -17,8 +17,10 @@ const fetchData = async (url, options = {}, requiresAuth = false) => {
   // Se borra el token si el servidor envía status 401 (no autorizado)
   // Sirve para tokens inválidos y caducados
   if (response.status === 401 && requiresAuth) {
-    ls.remove('token');
-    throw new Error('Unauthorized');
+    const error = new Error('Unauthorized');
+    error.status = 401;
+
+    throw error;
   }
 
   const data = await response.json();

@@ -35,7 +35,10 @@ const signup = async (formData) => {
 };
 
 const isAuthenticated = () => {
-  return !!ls.get('token', null);
+  const token = ls.get('token', null);
+  const user = ls.get('user', null);
+
+  return !!token && !!user;
 };
 
 const getUser = () => {
