@@ -68,7 +68,22 @@
         color: var(--color-brand-dark);
       }
     }
+
+    &__btn {
+      background-color: transparent;
+      border: none;
+      color: var(--color-brand);
+      font-size: 1rem;
+      font-weight: 500;
+
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--color-brand-dark);
+      }
+    }
   }
+
   &__hamb {
     grid-area: menu;
     padding-inline: var(--spacing-md);

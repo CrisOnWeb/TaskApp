@@ -27,6 +27,7 @@
   }
 
   &--secondary {
+    background-color: var(--surface);
     border: 2px solid var(--color-brand);
     color: var(--color-brand);
     transition: all 0.4s ease;

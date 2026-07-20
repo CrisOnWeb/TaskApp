@@ -10,6 +10,11 @@
   border-radius: var(--radius-md);
   background-color: var(--color-brand-border);
 
+  @media (width < 340px) {
+    grid-template-columns: auto;
+    grid-template-areas: 'label' 'input' 'button';
+  }
+
   &__label {
     grid-area: label;
     display: block;
@@ -18,6 +23,7 @@
 
   &__input {
     grid-area: input;
+    padding-block: var(--spacing-sm);
     padding-inline: var(--spacing-md);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
@@ -45,6 +51,11 @@
     border-radius: var(--radius-sm);
     background-color: var(--color-brand);
     cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--color-brand-dark);
+    }
   }
 }
 

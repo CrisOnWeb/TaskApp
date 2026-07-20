@@ -1,18 +1,23 @@
 import './Header.scss';
 import { useLocation, useNavigate } from 'react-router';
+import authService from '../../services/authService';
 import HeaderNav from './HeaderNav';
 import logo from '../../assets/img/logo.png';
 
 const Header = ({ search, setSearch }) => {
   const { pathname } = useLocation();
 
-  /*
   const navigate = useNavigate();
+
+  // Recuperar user
+  const user = authService.getUser();
+
+  // Cerrar sesión
   const handleLogout = () => {
-  localStorage.removeItem('token');
-  navigate('/');
-};
-  */
+    authService.logoutUser();
+
+    navigate('/login');
+  };
 
   // Array que contendrá los enlaces del Header
   const navItems = [];
@@ -40,14 +45,12 @@ const Header = ({ search, setSearch }) => {
     variant: 'button--primary',
   };
 
-  /*
   const logoutItem = {
-  label: 'Cerrar sesión',
-  type: 'button',
-  variant: 'button--secondary',
-  onClick: handleLogout,
-};
-  */
+    label: 'Cerrar sesión',
+    type: 'button',
+    variant: 'button--secondary',
+    onClick: handleLogout,
+  };
 
   // Creamos objeto condicional según la ruta
   if (isLanding) {
@@ -57,7 +60,7 @@ const Header = ({ search, setSearch }) => {
   } else if (isSignup) {
     navItems.push(homeItem, loginItem);
   } else if (isApp) {
-    // navItems.push(logoutItem);
+    navItems.push(logoutItem);
   }
 
   const handleSearchInput = (ev) => {
@@ -93,6 +96,12 @@ const Header = ({ search, setSearch }) => {
               onChange={handleSearchInput}
             />
           </form>
+        )}
+
+        {isApp && (
+          <p className="header__user">
+            ¡Hola, <span className="header__user-name">{user.name}</span>!
+          </p>
         )}
 
         <HeaderNav navItems={navItems} />

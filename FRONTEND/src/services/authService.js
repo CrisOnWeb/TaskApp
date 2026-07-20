@@ -14,6 +14,7 @@ const login = async (formData) => {
 
   if (response.success) {
     ls.set(TOKEN_KEY, response.token);
+    ls.set('user', { name: response.user.name });
   }
 
   return response;
@@ -37,4 +38,13 @@ const isAuthenticated = () => {
   return !!ls.get('token', null);
 };
 
-export default { login, signup, isAuthenticated };
+const getUser = () => {
+  return ls.get('user');
+};
+
+const logoutUser = () => {
+  ls.remove(TOKEN_KEY);
+  ls.remove('user');
+};
+
+export default { login, signup, isAuthenticated, getUser, logoutUser };

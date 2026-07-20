@@ -495,7 +495,7 @@ server.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
 
     // Verificar que el usuario existe en la base de datos
-    const sql = 'SELECT id, email, password FROM users WHERE email = ?;';
+    const sql = 'SELECT id, name, email, password FROM users WHERE email = ?;';
 
     connection = await getConnection();
     const [userResult] = await connection.query(sql, [email]);
@@ -533,7 +533,7 @@ server.post('/api/login', async (req, res) => {
     // Enviar token
     res.status(200).json({
       success: true,
-      userId: user.id,
+      user: { userId: user.id, name: user.name },
       token,
     });
   } catch (error) {

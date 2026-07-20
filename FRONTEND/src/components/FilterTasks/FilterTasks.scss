@@ -37,6 +37,10 @@
       padding-block: var(--spacing-sm);
       padding-inline: var(--radius-sm);
     }
+
+    @media (width < 370px) {
+      flex-direction: column;
+    }
   }
 
   &__btn {

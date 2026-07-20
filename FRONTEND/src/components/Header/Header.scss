@@ -29,7 +29,16 @@
   }
 
   &__name {
+    grid-area: user;
     color: var(--color-text-accent);
+
+    @media (width < 370px) {
+      font-size: 1.25rem;
+    }
+
+    @media (width < 340px) {
+      font-size: 1rem;
+    }
   }
 
   &__form {
@@ -59,6 +68,15 @@
       color: var(--color-text-muted);
     }
   }
+
+  &__user {
+    color: var(--color-text);
+
+    &-name {
+      color: var(--color-brand);
+      font-weight: 500;
+    }
+  }
 }
 
 .header-app {
@@ -68,14 +86,14 @@
 
   &__inner {
     grid-template-areas:
-      'branding menu'
-      'search search';
+      'branding user menu'
+      'search search search';
     gap: var(--spacing-lg);
     padding-bottom: var(--spacing-xs);
 
     @media (width > 768px) {
       grid-template-columns: auto 1fr auto;
-      grid-template-areas: ' branding search menu';
+      grid-template-areas: ' branding search user menu';
       padding-bottom: var(--spacing-md);
     }
   }

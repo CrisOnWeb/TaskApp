@@ -57,7 +57,7 @@ const HeaderNav = ({ navItems }) => {
                   </NavLink>
                 ) : (
                   <button
-                    className="header-nav-mobile__item"
+                    className="header-nav-mobile__btn"
                     onClick={() => {
                       item.onClick?.();
                       setIsOpen(false);
