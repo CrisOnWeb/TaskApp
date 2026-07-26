@@ -2,6 +2,10 @@
   background-color: var(--color-brand-light);
 
   &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding-block: var(--spacing-lg);
     padding-inline: var(--spacing-lg);
   }
@@ -27,6 +31,35 @@
     &:hover {
       transform: translateY(-2px);
       border-bottom: 2px solid var(--color-brand);
+    }
+  }
+
+  &__nav {
+    margin-top: var(--spacing-sm);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    list-style-type: none;
+
+    @media (width > 768px) {
+      flex-direction: row;
+      gap: var(--spacing-xl);
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    color: var(--color-brand);
+    font-weight: 500;
+    text-decoration-line: none;
+    transition: transform 0.2s ease-in;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
     }
   }
 }
