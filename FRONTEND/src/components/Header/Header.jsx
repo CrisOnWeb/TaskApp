@@ -22,10 +22,7 @@ const Header = ({ search, setSearch }) => {
   // Array que contendrá los enlaces del Header
   const navItems = [];
 
-  // Variables boolean que verifican la ruta
-  const isLanding = pathname === '/';
-  const isLogin = pathname === '/login';
-  const isSignup = pathname === '/signup';
+  // Variable boolean para verificar si la ruta es página principal
   const isApp = pathname === '/app';
 
   // Objetos de navegación
@@ -52,15 +49,31 @@ const Header = ({ search, setSearch }) => {
     onClick: handleLogout,
   };
 
-  // Creamos objeto condicional según la ruta
-  if (isLanding) {
-    navItems.push(loginItem, signupItem);
-  } else if (isLogin) {
-    navItems.push(homeItem, signupItem);
-  } else if (isSignup) {
-    navItems.push(homeItem, loginItem);
-  } else if (isApp) {
-    navItems.push(logoutItem);
+  switch (pathname) {
+    case '/':
+      navItems.push(loginItem, signupItem);
+      break;
+
+    case '/login':
+      navItems.push(homeItem, signupItem);
+      break;
+
+    case '/signup':
+      navItems.push(homeItem, loginItem);
+      break;
+
+    case '/app':
+      navItems.push(logoutItem);
+      break;
+
+    case '/privacy':
+    case '/terms':
+    case '/contact':
+      navItems.push(homeItem, loginItem);
+      break;
+
+    default:
+      navItems.push(homeItem, loginItem);
   }
 
   const handleSearchInput = (ev) => {
