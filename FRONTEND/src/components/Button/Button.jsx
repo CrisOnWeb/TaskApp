@@ -5,6 +5,7 @@ const Button = ({
   children,
   variant = '',
   to,
+  href,
   type = 'button',
   onClick,
   isNav = false,
@@ -16,6 +17,14 @@ const Button = ({
       <Component to={to} className={`button ${variant}`}>
         {children}
       </Component>
+    );
+  }
+
+  if (href) {
+    return (
+      <a href={href} className={`button ${variant}`}>
+        {children}
+      </a>
     );
   }
 
