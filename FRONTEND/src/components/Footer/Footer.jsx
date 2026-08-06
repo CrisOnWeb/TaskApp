@@ -36,7 +36,7 @@ const Footer = () => {
             <li className="footer__item">
               <a
                 className="footer__link"
-                href="www.linkedin.com/in/cristinaporteiro"
+                href="https://linkedin.com/in/cristinaporteiro"
                 target="_blank"
                 rel="noreferrer noopener"
               >
