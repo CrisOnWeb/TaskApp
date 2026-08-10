@@ -31,15 +31,13 @@ const LegalPageFooter = () => {
             Estaré encantada de recibir tus comentarios.
           </p>
 
-          <div className="legal-footer__button">
-            <Button
-              className="legal-footer__button"
-              href="mailto:contacto@taskapp.dev"
-              variant="button--primary"
-            >
-              Contactar
-            </Button>
-          </div>
+          <Button
+            href="mailto:contacto@taskapp.dev"
+            variant="button--primary"
+            className="legal-footer__button"
+          >
+            Contactar
+          </Button>
         </section>
       </div>
     </>
