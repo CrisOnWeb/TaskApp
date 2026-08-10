@@ -1,4 +1,9 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background-color: var(--color-surface);
   border-bottom: 2px solid var(--color-background);
 
   &__inner {

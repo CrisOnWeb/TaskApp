@@ -8,10 +8,12 @@ import Privacy from '../pages/Legal/Privacy';
 import Terms from '../pages/Legal/Terms';
 import Contact from '../pages/Contact/Contact';
 import NotFound from '../pages/NotFound/NotFound';
+import ScrollToTop from './ScrollToTop/ScrollToTop';
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route index element={<Landing />} />
         <Route path="/login" element={<Login />} />
