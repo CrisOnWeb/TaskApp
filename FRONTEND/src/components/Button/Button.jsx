@@ -9,12 +9,14 @@ const Button = ({
   type = 'button',
   onClick,
   isNav = false,
+  className,
+  ...rest
 }) => {
   if (to) {
     const Component = isNav ? NavLink : Link;
 
     return (
-      <Component to={to} className={`button ${variant}`}>
+      <Component to={to} className={`button ${variant} ${className}`} {...rest}>
         {children}
       </Component>
     );
@@ -22,14 +24,19 @@ const Button = ({
 
   if (href) {
     return (
-      <a href={href} className={`button ${variant}`}>
+      <a href={href} className={`button ${variant} ${className}`} {...rest}>
         {children}
       </a>
     );
   }
 
   return (
-    <button type={type} className={`button ${variant}`} onClick={onClick}>
+    <button
+      type={type}
+      className={`button ${variant} ${className}`}
+      onClick={onClick}
+      {...rest}
+    >
       {children}
     </button>
   );
