@@ -1,6 +1,6 @@
 {
   "name": "task-manager-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "ISC",
   "author": "crisonweb",
   "type": "module",
