@@ -1,5 +1,5 @@
 import './Header.scss';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate, Link } from 'react-router';
 import authService from '../../services/authService';
 import HeaderNav from './HeaderNav';
 import logo from '../../assets/img/logo.png';
@@ -85,14 +85,10 @@ const Header = ({ search, setSearch }) => {
       <div
         className={`header__inner central-column ${isApp ? 'header-app__inner' : ''}`}
       >
-        <div className="header__logoAndName">
-          <img
-            className="header__logo"
-            src={logo}
-            alt="Logo de la APP que muestra un dibujo de una tarea"
-          />
+        <Link to="/" className="header__logoAndName">
+          <img className="header__logo" src={logo} alt="" />
           <h1 className="header__name">TaskApp</h1>
-        </div>
+        </Link>
 
         {isApp && (
           <form className="header__form">
