@@ -30,10 +30,11 @@
   }
 
   &__logo {
+    padding: 0.25rem;
     width: 48px;
     height: auto;
 
-    @media (width < 380px) {
+    @media (width < 400px) {
       width: 36px;
     }
   }

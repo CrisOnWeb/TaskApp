@@ -82,6 +82,10 @@
     margin-bottom: var(--spacing-xl);
     font-size: 0.75rem;
 
+    @media (width < 340px) {
+      grid-template-columns: 1fr;
+    }
+
     @media (width > 900px) {
       margin-bottom: 0;
     }
@@ -93,13 +97,31 @@
 
   &__badge {
     max-width: 25ch;
+
     &:not(:first-child) {
       border-left: 1px solid var(--color-border);
       padding-left: var(--spacing-lg);
 
+      @media (width < 340px) {
+        border-left: none;
+        padding-left: var(--spacing-md);
+      }
+
       @media (width > 1228px) {
         padding-left: var(--spacing-xl);
       }
+    }
+
+    &:not(:last-child) {
+      @media (width < 340px) {
+        padding-bottom: var(--spacing-md);
+        border-bottom: 1px solid var(--color-border);
+      }
+    }
+
+    @media (width < 340px) {
+      margin: auto;
+      padding-inline: var(--spacing-md);
     }
 
     &-title {

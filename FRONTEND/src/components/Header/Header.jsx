@@ -2,7 +2,7 @@ import './Header.scss';
 import { useLocation, useNavigate, Link } from 'react-router';
 import authService from '../../services/authService';
 import HeaderNav from './HeaderNav';
-import logo from '../../assets/img/logo.png';
+import logo from '../../assets/img/logo.svg';
 
 const Header = ({ search, setSearch }) => {
   const { pathname } = useLocation();
