@@ -1,6 +1,6 @@
 import './Signup.scss';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { validateSignup } from '../../utils/validation';
 import authService from '../../services/authService';
 import Header from '../../components/Header/Header';
@@ -14,6 +14,9 @@ const Signup = () => {
     password: '',
     confirmPassword: '',
   });
+
+  // Para redirigir a login con registro exitoso
+  const navigate = useNavigate();
 
   // Mensajes de error frontend
   const [errors, setErrors] = useState({});
@@ -58,6 +61,13 @@ const Signup = () => {
       const { success, code } = await authService.signup(formData);
       if (success) {
         setServerError('');
+
+        // redirigimos a login y mandamos mensaje para mostrar
+        navigate('/login', {
+          state: {
+            message: '¡Cuenta creada correctamente! Ya puedes iniciar sesión.',
+          },
+        });
       } else {
         setServerError(messages[code]);
       }

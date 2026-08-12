@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { validateLogin } from '../../utils/validation';
 import authService from '../../services/authService';
 import './Login.scss';
@@ -14,6 +14,10 @@ const Login = () => {
     email: '',
     password: '',
   });
+
+  // Recuperamos el mensaje de signup exitoso si existe
+  const location = useLocation();
+  const message = location.state?.message;
 
   // Mensajes de error frontend
   const [errors, setErrors] = useState({});
@@ -78,6 +82,11 @@ const Login = () => {
     <>
       <Header />
       <main className="main login__main">
+        {message && (
+          <p className="login__success" role="status">
+            {message}
+          </p>
+        )}
         <section className="login">
           <h2 className="login__title">Iniciar sesión</h2>
           <p className="login__description">

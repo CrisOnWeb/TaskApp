@@ -109,3 +109,10 @@
     var(--color-brand-light) 100%
   );
 }
+
+.login__success {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-xs);
+  color: var(--color-brand-dark);
+  font-weight: 500;
+}
