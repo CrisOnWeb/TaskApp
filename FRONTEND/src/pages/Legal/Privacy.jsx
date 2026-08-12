@@ -63,7 +63,7 @@ const Privacy = () => {
               <strong>País:</strong> España
             </li>
             <li className="legal__item">
-              <strong>Correo electrónico:</strong> contacto@tudominio.com
+              <strong>Correo electrónico:</strong> contactcodeprojects@gmail.com
             </li>
           </ul>
 

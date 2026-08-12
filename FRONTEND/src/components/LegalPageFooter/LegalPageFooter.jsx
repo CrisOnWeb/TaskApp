@@ -15,9 +15,9 @@ const LegalPageFooter = () => {
             <br />
             <a
               className="legal-footer__link"
-              href="mailto:contacto@taskapp.dev"
+              href="mailto:contactcodeprojects@gmail.com"
             >
-              contacto@taskapp.dev
+              contactcodeprojects@gmail.com
             </a>
           </address>
         </section>
@@ -32,7 +32,7 @@ const LegalPageFooter = () => {
           </p>
 
           <Button
-            href="mailto:contacto@taskapp.dev"
+            href="mailto:contactcodeprojects@gmail.com"
             variant="button--primary"
             className="legal-footer__button"
           >

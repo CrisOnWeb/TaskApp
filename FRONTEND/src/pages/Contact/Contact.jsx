@@ -22,7 +22,7 @@ const Contact = () => {
 
   const handleCopyEmail = async () => {
     try {
-      await navigator.clipboard.writeText('contacto@taskapp.dev');
+      await navigator.clipboard.writeText('contactcodeprojects@gmail.com');
 
       // Cancelamos temporizador anterior
       clearTimeout(timeoutRef.current);
@@ -80,8 +80,11 @@ const Contact = () => {
               <p className="contact__text">
                 La forma más rápida de contactar conmigo.
               </p>
-              <a className="contact__link" href="mailto:contacto@taskapp.dev">
-                contacto@taskapp.dev
+              <a
+                className="contact__link"
+                href="mailto:contactcodeprojects@gmail.com"
+              >
+                contactcodeprojects@gmail.com
               </a>
             </div>
             <p aria-live="polite" className="visually-hidden">
