@@ -56,7 +56,7 @@ const TaskApp = () => {
       const searchedText = normalizeText(search);
       return filteredTasks.filter((task) =>
         // Recojo las tareas que coincidan
-        normalizeText(task.text).includes(searchedText)
+        normalizeText(task.title).includes(searchedText)
       );
     }
   };
