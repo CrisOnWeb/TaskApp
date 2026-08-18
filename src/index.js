@@ -124,20 +124,9 @@ server.post('/api/tasks', authenticateToken, async (req, res) => {
       });
     }
 
-    // Comprobar que la tarea no existe
-    let sql = 'SELECT id FROM tasks WHERE title = ? AND user_id = ?;';
-
     connection = await getConnection();
-    const [existingTask] = await connection.query(sql, [title.trim(), user_id]);
 
-    if (existingTask.length > 0) {
-      return res.status(409).json({
-        success: false,
-        error: 'Task already exists',
-      });
-    }
-
-    sql = 'INSERT INTO tasks (title, user_id, completed) VALUES (?, ?, ?);';
+    let sql = 'INSERT INTO tasks (title, user_id, completed) VALUES (?, ?, ?);';
 
     const [taskInserted] = await connection.execute(sql, [
       title.trim(),
@@ -265,25 +254,9 @@ server.put('/api/tasks/:taskId', authenticateToken, async (req, res) => {
       });
     }
 
-    // Comprobar que la tarea que se modifica no coincide con ninguna existente
-    let sql =
-      'SELECT id FROM tasks WHERE title = ? AND user_id = ? AND id <> ?;';
-
     connection = await getConnection();
-    const [existingTask] = await connection.query(sql, [
-      title.trim(),
-      user_id,
-      Number(taskId),
-    ]);
 
-    if (existingTask.length > 0) {
-      return res.status(409).json({
-        success: false,
-        error: 'Task already exists',
-      });
-    }
-
-    sql = `UPDATE tasks
+    let sql = `UPDATE tasks
                   SET title = ?, completed = ?
                   WHERE id = ? AND user_id = ?
                   LIMIT 1;`;
